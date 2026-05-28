@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa de Homicídios por Pontos - Uberaba MG</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <style>
+    :root { --azul:#0F4C81; --texto:#172033; --borda:#D8E0EA; --muted:#667085; }
+    html, body { margin:0; padding:0; width:100%; height:100%; font-family:Arial, Helvetica, sans-serif; background:#F4F6F8; color:var(--texto); overflow:hidden; }
+    .topbar { position:fixed; top:0; left:0; right:0; z-index:3000; min-height:62px; background:rgba(255,255,255,.97); border-bottom:1px solid var(--borda); box-shadow:0 2px 12px rgba(0,0,0,.10); display:flex; align-items:center; justify-content:space-between; gap:12px; padding:8px 14px; box-sizing:border-box; }
+    .title { font-weight:800; font-size:15px; letter-spacing:.2px; }
+    .sub { font-size:12px; color:var(--muted); margin-top:3px; }
+    .actions { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+    button { border:1px solid #CBD5E1; background:#fff; color:var(--azul); font-weight:700; padding:7px 10px; border-radius:8px; cursor:pointer; }
+    button:hover { background:#F8FAFC; }
+    #map, #fallback { position:fixed; top:62px; left:0; width:100%; height:calc(100vh - 62px); }
+    #map { display:none; background:#fff; }
+    #fallback { display:block; overflow:hidden; background:#EEF2F7; }
+    .panel { background:rgba(255,255,255,.96); border:1px solid #D6DEE8; box-shadow:0 4px 18px rgba(0,0,0,.13); border-radius:12px; padding:12px 14px; font-size:12px; line-height:1.35; max-width:340px; }
+    .panel h3 { margin:0 0 8px 0; font-size:14px; }
+    .legend-row { display:flex; align-items:center; gap:8px; margin:5px 0; }
+    .swatch { display:inline-block; width:18px; height:14px; border-radius:50%; border:1px solid rgba(0,0,0,.22); }
+    .note { color:var(--muted); font-size:11px; margin-top:8px; }
+    .leaflet-popup-content { font-size:13px; line-height:1.4; }
+    .fallback-legend { position:absolute; right:16px; bottom:16px; z-index:2; }
+    .fallback-msg { position:absolute; left:16px; top:16px; z-index:2; }
+    .svg-wrap { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+    .pt { stroke:#111827; stroke-width:1.2; opacity:.88; filter:url(#softShadow); }
+    .area-label { font-size:22px; font-weight:800; fill:#334155; opacity:.26; text-anchor:middle; text-transform:uppercase; }
+    .road { fill:none; stroke:#94A3B8; stroke-width:7; opacity:.32; stroke-linecap:round; }
+    .road.major { stroke:#64748B; stroke-width:10; opacity:.42; }
+    .map-note { font-size:14px; fill:#475569; }
+    @media(max-width:760px) { .topbar { align-items:flex-start; flex-direction:column; } #map,#fallback { top:102px; height:calc(100vh - 102px); } .fallback-legend { left:12px; right:auto; bottom:12px; } }
+    @media print { .actions,.leaflet-control-zoom,.leaflet-control-layers { display:none!important; } .topbar { position:absolute; } #map,#fallback { top:62px; } }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div>
+      <div class="title">Mapa de Homicídios por Pontos – Uberaba/MG</div>
+      <div class="sub">Visualização pontual com ruas visíveis. Os popups resumem cada ocorrência sem exibir endereço textual detalhado.</div>
+    </div>
+    <div class="actions">
+      <button onclick="resetView()">Centralizar</button>
+      <button onclick="window.print()">Imprimir</button>
+    </div>
+  </div>
+
+  <div id="map" aria-label="Mapa online com base cartográfica"></div>
+
+  <div id="fallback" aria-label="Mapa offline em SVG">
+    <div class="panel fallback-msg">
+      <b>Visualização offline carregada</b><br>
+      Se houver internet liberada, o arquivo tentará abrir o mapa com ruas reais automaticamente.<br>
+      <span class="note">Esta visualização já apresenta os pontos das ocorrências.</span>
+    </div>
+    <div class="svg-wrap">
+<svg viewBox="0 0 1400 820" width="100%" height="100%" role="img" aria-label="Mapa esquemático de homicídios por pontos">
+  <defs>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="#EEF2F7"/>
+  <rect x="37.0" y="192.3" width="1326.0" height="435.4" rx="18" fill="#F8FAFC" stroke="#CBD5E1"/>
+  <g class="roads">
+<path class="road major" d="M 112.0,402.7 C 473.9,373.5 863.3,446.5 1288.0,417.3"/>
+<path class="road" d="M 348.3,257.3 C 423.7,336.9 599.5,464.8 624.6,562.7"/>
+<path class="road" d="M 951.2,262.3 C 863.3,358.8 800.5,483.1 737.7,557.7"/>
+</g>
+  <g><circle class="pt" cx="308.2" cy="343.4" r="6.5" fill="#F59E0B"><title>PTO-01 | TENTADO | NOSSA SENHORA DA ABADIA | 18/04/2024</title></circle><circle class="pt" cx="369.7" cy="536.1" r="6.5" fill="#B91C1C"><title>PTO-02 | CONSUMADO | NOSSA SENHORA DA ABADIA | 14/11/2021</title></circle><circle class="pt" cx="384.7" cy="439.8" r="6.5" fill="#B91C1C"><title>PTO-03 | CONSUMADO | NOSSA SENHORA DA ABADIA | 10/06/2021</title></circle><circle class="pt" cx="763.1" cy="524.2" r="6.5" fill="#B91C1C"><title>PTO-04 | CONSUMADO | COSTA TELLES I | 30/06/2020</title></circle><circle class="pt" cx="467.3" cy="522.1" r="6.5" fill="#B91C1C"><title>PTO-05 | CONSUMADO | NOSSA SENHORA DA ABADIA | 27/10/2020</title></circle><circle class="pt" cx="1328.0" cy="466.9" r="6.5" fill="#B91C1C"><title>PTO-06 | CONSUMADO | NOSSA SENHORA DE LOURDES | 17/09/2020</title></circle><circle class="pt" cx="907.2" cy="494.4" r="6.5" fill="#B91C1C"><title>PTO-07 | CONSUMADO | COSTA TELLES I | 10/09/2024</title></circle><circle class="pt" cx="169.5" cy="457.3" r="6.5" fill="#B91C1C"><title>PTO-08 | CONSUMADO | NOSSA SENHORA DA ABADIA | 24/11/2024</title></circle><circle class="pt" cx="395.2" cy="442.0" r="6.5" fill="#B91C1C"><title>PTO-09 | CONSUMADO | NOSSA SENHORA DA ABADIA | 13/04/2023</title></circle><circle class="pt" cx="209.0" cy="429.0" r="6.5" fill="#B91C1C"><title>PTO-10 | CONSUMADO | NOSSA SENHORA DA ABADIA | 11/04/2023</title></circle><circle class="pt" cx="72.0" cy="227.3" r="6.5" fill="#B91C1C"><title>PTO-11 | CONSUMADO | NOSSA SENHORA DA ABADIA | 11/07/2025</title></circle><circle class="pt" cx="291.5" cy="586.4" r="6.5" fill="#F59E0B"><title>PTO-12 | TENTADO | NOSSA SENHORA DA ABADIA | 30/08/2025</title></circle><circle class="pt" cx="981.6" cy="492.3" r="6.5" fill="#B91C1C"><title>PTO-13 | CONSUMADO | NOSSA SENHORA DE LOURDES | 07/07/2024</title></circle><circle class="pt" cx="102.2" cy="235.9" r="6.5" fill="#F59E0B"><title>PTO-14 | TENTADO | NOSSA SENHORA DA ABADIA | 01/12/2024</title></circle><circle class="pt" cx="294.0" cy="502.9" r="6.5" fill="#B91C1C"><title>PTO-15 | CONSUMADO | NOSSA SENHORA DA ABADIA | 29/03/2026</title></circle><circle class="pt" cx="327.3" cy="507.0" r="6.5" fill="#F59E0B"><title>PTO-16 | TENTADO | NOSSA SENHORA DA ABADIA | 21/03/2026</title></circle><circle class="pt" cx="374.5" cy="298.7" r="6.5" fill="#F59E0B"><title>PTO-17 | TENTADO | NOSSA SENHORA DA ABADIA | 30/04/2021</title></circle><circle class="pt" cx="292.6" cy="520.8" r="6.5" fill="#F59E0B"><title>PTO-18 | TENTADO | NOSSA SENHORA DA ABADIA | 24/04/2021</title></circle><circle class="pt" cx="632.1" cy="396.9" r="6.5" fill="#B91C1C"><title>PTO-19 | CONSUMADO | NOSSA SENHORA DA ABADIA | 21/11/2020</title></circle><circle class="pt" cx="533.0" cy="476.7" r="6.5" fill="#F59E0B"><title>PTO-20 | TENTADO | NOSSA SENHORA DA ABADIA | 06/12/2020</title></circle><circle class="pt" cx="355.7" cy="517.7" r="6.5" fill="#B91C1C"><title>PTO-21 | CONSUMADO | NOSSA SENHORA DA ABADIA | 09/11/2022</title></circle><circle class="pt" cx="272.6" cy="588.4" r="6.5" fill="#F59E0B"><title>PTO-22 | TENTADO | NOSSA SENHORA DA ABADIA | 31/10/2023</title></circle><circle class="pt" cx="290.2" cy="592.7" r="6.5" fill="#F59E0B"><title>PTO-23 | TENTADO | NOSSA SENHORA DA ABADIA | 27/08/2023</title></circle><circle class="pt" cx="796.2" cy="480.4" r="6.5" fill="#B91C1C"><title>PTO-24 | CONSUMADO | COSTA TELLES I | 26/05/2022</title></circle><circle class="pt" cx="102.2" cy="235.9" r="6.5" fill="#F59E0B"><title>PTO-25 | TENTADO | NOSSA SENHORA DA ABADIA | 17/01/2022</title></circle><circle class="pt" cx="931.9" cy="510.4" r="6.5" fill="#F59E0B"><title>PTO-26 | TENTADO | COSTA TELLES I | 02/02/2023</title></circle><circle class="pt" cx="990.1" cy="463.6" r="6.5" fill="#B91C1C"><title>PTO-27 | CONSUMADO | NOSSA SENHORA DE LOURDES | 29/03/2021</title></circle></g>
+  <g><text class="area-label" x="849.6" y="502.3">Costa Telles I</text><text class="area-label" x="312.2" y="442.8">Abadia</text><text class="area-label" x="1099.9" y="474.3">Lourdes</text></g>
+  <text x="72.0" y="778" class="map-note">Versão offline/sintética de base cartográfica. A versão online, quando disponível, mostra ruas reais pelo OpenStreetMap/CARTO.</text>
+</svg>
+</div>
+    <div class="panel fallback-legend"><h3>Legenda</h3>
+      <div class="legend-row"><span class="swatch" style="background:#B91C1C"></span>Homicídio consumado</div>
+      <div class="legend-row"><span class="swatch" style="background:#F59E0B"></span>Homicídio tentado</div>
+      <div class="note">Homicídios georreferenciados processados: 27.<br>Consumados: 16. Tentados: 11.</div>
+    </div>
+  </div>
+
+  <script>
+    const DATA_POINTS = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"id": "PTO-01", "data_fato": "18/04/2024", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9235239, -19.7575948]}}, {"type": "Feature", "properties": {"id": "PTO-02", "data_fato": "14/11/2021", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "LOJA ATACADISTA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9216668, -19.7634111]}}, {"type": "Feature", "properties": {"id": "PTO-03", "data_fato": "10/06/2021", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "OUTROS - ESTABELECIMENTOS COMERCIAIS / SERVICOS", "natureza": "ROUBO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.921213, -19.7605049]}}, {"type": "Feature", "properties": {"id": "PTO-04", "data_fato": "30/06/2020", "bairro": "COSTA TELLES I", "situacao": "CONSUMADO", "meio": "Não informado", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9097932, -19.7630519]}}, {"type": "Feature", "properties": {"id": "PTO-05", "data_fato": "27/10/2020", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9187201, -19.7629893]}}, {"type": "Feature", "properties": {"id": "PTO-06", "data_fato": "17/09/2020", "bairro": "NOSSA SENHORA DE LOURDES", "situacao": "CONSUMADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.8927424, -19.7613229]}}, {"type": "Feature", "properties": {"id": "PTO-07", "data_fato": "10/09/2024", "bairro": "COSTA TELLES I", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9054442, -19.7621518]}}, {"type": "Feature", "properties": {"id": "PTO-08", "data_fato": "24/11/2024", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ATO DE SUFOCAR, ENFORCAR, ESTRANGULAR OU ESGANAR.", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9277103, -19.7610328]}}, {"type": "Feature", "properties": {"id": "PTO-09", "data_fato": "13/04/2023", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "ARMARINHO", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.920897, -19.7605704]}}, {"type": "Feature", "properties": {"id": "PTO-10", "data_fato": "11/04/2023", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "BAR / LANCHONETE / RESTAURANTE / SIMILAR", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9265172, -19.7601782]}}, {"type": "Feature", "properties": {"id": "PTO-11", "data_fato": "11/07/2025", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARROMBAMENTO/ROMPIMENTO DE OBSTACULO", "local": "VIA DE ACESSO PUBLICA", "natureza": "FURTO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9306518, -19.7540909]}}, {"type": "Feature", "properties": {"id": "PTO-12", "data_fato": "30/08/2025", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "INFLAMAVEIS/COMBUSTIVEIS/QUIMICOS/EXPLOSIVOS/FOGO", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9240271, -19.7649287]}}, {"type": "Feature", "properties": {"id": "PTO-13", "data_fato": "07/07/2024", "bairro": "NOSSA SENHORA DE LOURDES", "situacao": "CONSUMADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9031976, -19.7620883]}}, {"type": "Feature", "properties": {"id": "PTO-14", "data_fato": "01/12/2024", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9297401, -19.7543486]}}, {"type": "Feature", "properties": {"id": "PTO-15", "data_fato": "29/03/2026", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "OUTROS - DEPOSITO EM GERAL", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9239511, -19.7624077]}}, {"type": "Feature", "properties": {"id": "PTO-16", "data_fato": "21/03/2026", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "ARMAS DE FOGO", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9229466, -19.7625337]}}, {"type": "Feature", "properties": {"id": "PTO-17", "data_fato": "30/04/2021", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "ARMAS DE FOGO", "local": "OUTROS - ESTABELECIMENTOS COMERCIAIS / SERVICOS", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9215206, -19.7562442]}}, {"type": "Feature", "properties": {"id": "PTO-18", "data_fato": "24/04/2021", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "ARMAS DE FOGO", "local": "BORRACHARIA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9239937, -19.7629483]}}, {"type": "Feature", "properties": {"id": "PTO-19", "data_fato": "21/11/2020", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9137451, -19.7592084]}}, {"type": "Feature", "properties": {"id": "PTO-20", "data_fato": "06/12/2020", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9167389, -19.7616169]}}, {"type": "Feature", "properties": {"id": "PTO-21", "data_fato": "09/11/2022", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "CONSUMADO", "meio": "ARMAS DE FOGO", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9220902, -19.7628549]}}, {"type": "Feature", "properties": {"id": "PTO-22", "data_fato": "31/10/2023", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "ARMAS DE FOGO", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9245969, -19.7649893]}}, {"type": "Feature", "properties": {"id": "PTO-23", "data_fato": "27/08/2023", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9240654, -19.7651189]}}, {"type": "Feature", "properties": {"id": "PTO-24", "data_fato": "26/05/2022", "bairro": "COSTA TELLES I", "situacao": "CONSUMADO", "meio": "ATO DE SUFOCAR, ENFORCAR, ESTRANGULAR OU ESGANAR.", "local": "CASA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9087931, -19.7617301]}}, {"type": "Feature", "properties": {"id": "PTO-25", "data_fato": "17/01/2022", "bairro": "NOSSA SENHORA DA ABADIA", "situacao": "TENTADO", "meio": "ARMAS DE FOGO", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9297401, -19.7543486]}}, {"type": "Feature", "properties": {"id": "PTO-26", "data_fato": "02/02/2023", "bairro": "COSTA TELLES I", "situacao": "TENTADO", "meio": "ARMAS DE FOGO", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#F59E0B"}, "geometry": {"type": "Point", "coordinates": [-47.9046983, -19.762634]}}, {"type": "Feature", "properties": {"id": "PTO-27", "data_fato": "29/03/2021", "bairro": "NOSSA SENHORA DE LOURDES", "situacao": "CONSUMADO", "meio": "INST.CONTUNDENTE/CORTANTE/PERFURANTE (ARMA BRANCA)", "local": "VIA DE ACESSO PUBLICA", "natureza": "HOMICIDIO", "color": "#B91C1C"}, "geometry": {"type": "Point", "coordinates": [-47.9029415, -19.7612234]}}]};
+    const STATS = {"total_registros": 27, "total_validos": 27, "consumados": 16, "tentados": 11, "center": [-19.7609675, -47.918358], "bbox": [[-19.7651189, -47.9306518], [-19.7540909, -47.8927424]]};
+    let map = null;
+    let layerConsumados = null;
+    let layerTentados = null;
+    let layerTodos = null;
+
+    function markerStyle(feature) {
+      return {
+        radius: 7,
+        color: '#111827',
+        weight: 1,
+        opacity: 0.9,
+        fillColor: feature.properties.color,
+        fillOpacity: 0.8,
+      };
+    }
+
+    function popupHtml(p) {
+      return `<b>${p.id}</b><br>` +
+             `Data: <b>${p.data_fato}</b><br>` +
+             `Bairro: <b>${p.bairro}</b><br>` +
+             `Situação: <b>${p.situacao}</b><br>` +
+             `Meio utilizado: <b>${p.meio}</b><br>` +
+             `Local imediato: <b>${p.local}</b>`;
+    }
+
+    function legendHtml() {
+      return `<h3>Legenda</h3>
+        <div class="legend-row"><span class="swatch" style="background:#B91C1C"></span>Homicídio consumado</div>
+        <div class="legend-row"><span class="swatch" style="background:#F59E0B"></span>Homicídio tentado</div>
+        <div class="note">Homicídios georreferenciados processados: ${STATS.total_validos}.<br>Consumados: ${STATS.consumados}. Tentados: ${STATS.tentados}.</div>`;
+    }
+
+    function showFallback(message) {
+      const fb = document.getElementById('fallback');
+      document.getElementById('map').style.display = 'none';
+      fb.style.display = 'block';
+      if (message) {
+        const msg = fb.querySelector('.fallback-msg');
+        if (msg) msg.innerHTML = `<b>Visualização offline carregada</b><br>${message}<br><span class="note">Esta visualização já apresenta os pontos das ocorrências.</span>`;
+      }
+    }
+
+    function buildLayer(filterFn) {
+      return L.geoJSON(DATA_POINTS, {
+        filter: filterFn,
+        pointToLayer: function(feature, latlng) {
+          return L.circleMarker(latlng, markerStyle(feature));
+        },
+        onEachFeature: function(feature, layer) {
+          layer.bindPopup(popupHtml(feature.properties));
+        }
+      });
+    }
+
+    function initLeaflet() {
+      if (typeof L === 'undefined') {
+        showFallback('A biblioteca Leaflet não carregou.');
+        return;
+      }
+      try {
+        const mapDiv = document.getElementById('map');
+        mapDiv.style.display = 'block';
+        document.getElementById('fallback').style.display = 'none';
+        map = L.map('map', { zoomControl:true, preferCanvas:true, zoomSnap:0.25 }).setView(STATS.center, 15);
+        map.createPane('labelsPane');
+        map.getPane('labelsPane').style.zIndex = 650;
+        map.getPane('labelsPane').style.pointerEvents = 'none';
+        const ruasSemRotulos = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_nolabels/{z}/{x}/{y}{r}.png', { maxZoom:21, attribution:'&copy; OpenStreetMap contributors &copy; CARTO' });
+        const ruas = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:21, maxNativeZoom:19, attribution:'&copy; OpenStreetMap contributors' });
+        const claro = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom:21, attribution:'&copy; OpenStreetMap contributors &copy; CARTO' });
+        const nomesRuas = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png', { maxZoom:21, pane:'labelsPane', opacity:1.0, attribution:'' });
+        ruasSemRotulos.addTo(map);
+        nomesRuas.addTo(map);
+
+        layerTodos = buildLayer(function(){return true;}).addTo(map);
+        layerConsumados = buildLayer(function(feature){ return (feature.properties.situacao || '').toUpperCase() === 'CONSUMADO'; });
+        layerTentados = buildLayer(function(feature){ return (feature.properties.situacao || '').toUpperCase() === 'TENTADO'; });
+
+        map.fitBounds(STATS.bbox, { padding:[35,35] });
+        L.control.layers(
+          {'Ruas com nomes destacados':ruasSemRotulos, 'OpenStreetMap':ruas, 'Mapa claro':claro},
+          {'Todos os homicídios':layerTodos, 'Somente consumados':layerConsumados, 'Somente tentados':layerTentados, 'Nomes das ruas por cima':nomesRuas},
+          {collapsed:false, position:'topleft'}
+        ).addTo(map);
+        const legend = L.control({position:'bottomright'});
+        legend.onAdd = function() { const div = L.DomUtil.create('div','panel'); div.innerHTML = legendHtml(); return div; };
+        legend.addTo(map);
+        setTimeout(function() { map.invalidateSize(); }, 250);
+      } catch (err) {
+        console.error(err);
+        showFallback('O mapa online não pôde ser iniciado.');
+      }
+    }
+
+    function resetView() {
+      if (map) {
+        map.fitBounds(STATS.bbox, { padding:[35,35] });
+      }
+    }
+
+    window.addEventListener('load', function() {
+      setTimeout(initLeaflet, 150);
+    });
+  </script>
+</body>
+</html>

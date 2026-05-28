@@ -1,0 +1,3463 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a31c1afa0437d16eea64eeaf058998de {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+</head>
+<body>
+    
+    
+<div style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    min-height: 46px; display: flex; align-items: center;
+    justify-content: space-between; padding: 8px 14px;
+    background: rgba(255,255,255,0.96); border-bottom: 2px solid #1F4E79;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+    font-family: Arial, sans-serif; font-size: 13px; color: #1f2937;">
+    <strong style="font-size: 14px; color: #1F4E79;">
+        Indícios de Organização Criminosa &times; Convergência Criminal
+        &mdash; Sobreposição Territorial
+    </strong>
+    <span style="color: #595959; font-size: 12px;">
+        5&ordf; RPM &mdash; P/3 &mdash; Uberaba/MG</span>
+</div>
+<style>.leaflet-container { margin-top: 46px !important; }</style>
+    
+<div style="position: fixed; bottom: 28px; left: 12px; z-index: 999;
+    background: rgba(255,255,255,0.97); border: 1.5px solid #1F4E79;
+    border-radius: 4px; padding: 11px 14px; font-family: Arial;
+    font-size: 12px; color: #1f2937; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    max-width: 270px;">
+    <div style="font-weight:bold;color:#1F4E79;margin-bottom:6px;
+         border-bottom:1px solid #ccc;padding-bottom:4px;">
+        Sobreposição PCC &times; 3 naturezas<br>
+        <span style='font-weight:normal;font-size:10px;color:#595959;'>
+        Hexágonos H3 (~400 m) &mdash; 2020 a 2026</span></div>
+    <div style='font-weight:bold;font-size:10.5px;margin:4px 0 2px;'>
+        Convergência criminal (hexágonos):</div>
+    <div style='margin:2px 0;'><span style='display:inline-block;width:12px;
+        height:12px;background:#8B1A1A;border:1px solid #333;
+        vertical-align:middle;margin-right:5px;'></span>3 naturezas</div>
+    <div style='margin:2px 0;'><span style='display:inline-block;width:12px;
+        height:12px;background:#E67E22;border:1px solid #333;
+        vertical-align:middle;margin-right:5px;'></span>2 naturezas</div>
+    <div style='margin:2px 0;'><span style='display:inline-block;width:12px;
+        height:12px;background:#F2C94C;border:1px solid #333;
+        vertical-align:middle;margin-right:5px;'></span>1 natureza</div>
+    <div style='font-weight:bold;font-size:10.5px;margin:7px 0 2px;
+         border-top:1px solid #eee;padding-top:5px;'>
+        Menções ao PCC (pontos):</div>
+    <div style='margin:2px 0;'><span style='display:inline-block;width:12px;
+        height:12px;border-radius:50%;background:#1F4E79;
+        border:1.5px solid #fff;vertical-align:middle;margin-right:5px;
+        outline:1px solid #333;'></span>Instrumental (27)</div>
+    <div style='margin:2px 0;'><span style='display:inline-block;width:14px;
+        height:14px;border-radius:50%;background:#000000;
+        border:1.5px solid #fff;vertical-align:middle;margin-right:5px;
+        outline:1px solid #333;'></span>Inteligência (12)</div>
+    <div style='margin-top:7px;font-size:9.5px;color:#777;line-height:1.35;
+         border-top:1px solid #eee;padding-top:5px;'>
+        75% das menções caem em zonas de 2+ naturezas; 95% em zonas com
+        ao menos uma natureza criminal.</div>
+</div>
+    
+            <div class="folium-map" id="map_a31c1afa0437d16eea64eeaf058998de" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a31c1afa0437d16eea64eeaf058998de = L.map(
+                "map_a31c1afa0437d16eea64eeaf058998de",
+                {
+                    center: [-19.7625, -47.915],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_a31c1afa0437d16eea64eeaf058998de);
+
+            
+
+        
+    
+            var tile_layer_761968c96d585d58ae9fdfafb030eaec = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_761968c96d585d58ae9fdfafb030eaec.addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+    map_a31c1afa0437d16eea64eeaf058998de.createPane('ruasLabels');
+    map_a31c1afa0437d16eea64eeaf058998de.getPane('ruasLabels').style.zIndex = 650;
+    map_a31c1afa0437d16eea64eeaf058998de.getPane('ruasLabels').style.pointerEvents
+        = 'none';
+    
+    map_a31c1afa0437d16eea64eeaf058998de.createPane('pccPoints');
+    map_a31c1afa0437d16eea64eeaf058998de.getPane('pccPoints').style.zIndex = 700;
+    
+            var feature_group_fc7896dea4d2c091820217ce05a0b273 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_25152c37043a54e4567a32b3b1a4da4a = L.polygon(
+                [[-19.760955437621778, -47.904031477864756], [-19.75941236336011, -47.902974902994295], [-19.757767698612902, -47.90393579446365], [-19.757666120634376, -47.90595324487592], [-19.759209198177107, -47.90700981294096], [-19.760853850417327, -47.9060489374004]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_9cd70feb58997e1ed38dd0cb00640cff = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_c28df65d8202dcadf0bb8fe4ff906243 = $(`<div id="html_c28df65d8202dcadf0bb8fe4ff906243" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 16<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA PADRE EDDIE BERNARDES SILVA (9)<br>&bull; AVENIDA ORLANDO RODRIGUES CUNHA (2)<br>&bull; RUA DAS MARGARIDAS (2)     </div></div>`)[0];
+                popup_9cd70feb58997e1ed38dd0cb00640cff.setContent(html_c28df65d8202dcadf0bb8fe4ff906243);
+            
+        
+
+        polygon_25152c37043a54e4567a32b3b1a4da4a.bindPopup(popup_9cd70feb58997e1ed38dd0cb00640cff)
+        ;
+
+        
+    
+    
+            polygon_25152c37043a54e4567a32b3b1a4da4a.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:16 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_e9d4aa40a42beb371622890aad35c0b3 = L.polygon(
+                [[-19.767330623026197, -47.90422284736348], [-19.765787655531334, -47.903166262470435], [-19.76414307909797, -47.9041271621647], [-19.764041482668464, -47.90614463082379], [-19.765584453448103, -47.90720120891093], [-19.767229017372507, -47.9062403251461]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_c7b1ead0552332e85a60051540737187 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_4f84a989ad9b35d69fcae8a2409c66a3 = $(`<div id="html_4f84a989ad9b35d69fcae8a2409c66a3" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 48<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA MAURO SABINO LOES (25)<br>&bull; RUA JOANA MARIA JESUS (8)<br>&bull; RUA CONEGO JOSE CIRILO PACHECO (7)     </div></div>`)[0];
+                popup_c7b1ead0552332e85a60051540737187.setContent(html_4f84a989ad9b35d69fcae8a2409c66a3);
+            
+        
+
+        polygon_e9d4aa40a42beb371622890aad35c0b3.bindPopup(popup_c7b1ead0552332e85a60051540737187)
+        ;
+
+        
+    
+    
+            polygon_e9d4aa40a42beb371622890aad35c0b3.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:48 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_dbbc51060fb008e3a78c549dfcf54cb5 = L.polygon(
+                [[-19.760040361422753, -47.92218807835068], [-19.758497427644038, -47.92113152936763], [-19.756852705562945, -47.92209231285262], [-19.756750929785426, -47.92410962936197], [-19.758293866834094, -47.92516617150512], [-19.759938576390354, -47.92420540398005]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_f9f169516aa61a5333fe3d426295760e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_a2eec00c652ff4fca52e8fd672cd9c6a = $(`<div id="html_a2eec00c652ff4fca52e8fd672cd9c6a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; RUA VIGARIO CARLOS (2)<br>&bull; RUA CAMPOS SALLES (1)<br>&bull; RUA PATOS (1)     </div></div>`)[0];
+                popup_f9f169516aa61a5333fe3d426295760e.setContent(html_a2eec00c652ff4fca52e8fd672cd9c6a);
+            
+        
+
+        polygon_dbbc51060fb008e3a78c549dfcf54cb5.bindPopup(popup_f9f169516aa61a5333fe3d426295760e)
+        ;
+
+        
+    
+    
+            polygon_dbbc51060fb008e3a78c549dfcf54cb5.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:5 A:0 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_3487d4e2f4f7f7e993c45abf9d238f3e = L.polygon(
+                [[-19.75654731230997, -47.92814421766899], [-19.755004371994097, -47.927087682371386], [-19.753359586717433, -47.928048425711694], [-19.75325775428645, -47.930065688380864], [-19.75480069786674, -47.93112221682731], [-19.756445470613606, -47.93016148945698]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_d86e86edf2f8a6b4a646aba61a88aa41 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_2f6ecf5eb611c9cd97e6515c7ea12a08 = $(`<div id="html_2f6ecf5eb611c9cd97e6515c7ea12a08" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 7<br>         <b>Armas:</b> 2<br>         <b>Homicídios:</b> 2<br>         <b>Logradouros:</b><br>&bull; RUA CASTRO ALVES (7)<br>&bull; AVENIDA GETULIO GUARITA (4)     </div></div>`)[0];
+                popup_d86e86edf2f8a6b4a646aba61a88aa41.setContent(html_2f6ecf5eb611c9cd97e6515c7ea12a08);
+            
+        
+
+        polygon_3487d4e2f4f7f7e993c45abf9d238f3e.bindPopup(popup_d86e86edf2f8a6b4a646aba61a88aa41)
+        ;
+
+        
+    
+    
+            polygon_3487d4e2f4f7f7e993c45abf9d238f3e.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:7 A:2 H:2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_65579c2ef5d588cfa7ae9b26a0ebbf5e = L.polygon(
+                [[-19.76414307909797, -47.9041271621647], [-19.7626000582161, -47.903070582282965], [-19.760955437621778, -47.904031477864756], [-19.760853850417327, -47.9060489374004], [-19.762396874582116, -47.90710551047648], [-19.764041482668464, -47.90614463082379]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_1c3d7144e74b6d85f88c2d3fc5274c76 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_85313f33cf5d974acc76f3e85f0d1a4e = $(`<div id="html_85313f33cf5d974acc76f3e85f0d1a4e" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 50<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 2<br>         <b>Logradouros:</b><br>&bull; RUA DAS MARGARIDAS (27)<br>&bull; RUA MARGARIDA HELENA GOMES (8)<br>&bull; RUA DAS VIOLETAS (5)     </div></div>`)[0];
+                popup_1c3d7144e74b6d85f88c2d3fc5274c76.setContent(html_85313f33cf5d974acc76f3e85f0d1a4e);
+            
+        
+
+        polygon_65579c2ef5d588cfa7ae9b26a0ebbf5e.bindPopup(popup_1c3d7144e74b6d85f88c2d3fc5274c76)
+        ;
+
+        
+    
+    
+            polygon_65579c2ef5d588cfa7ae9b26a0ebbf5e.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:50 A:1 H:2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_849cc259fc5e7d87f779d43e2fdce4b9 = L.polygon(
+                [[-19.764752195898925, -47.89202203843164], [-19.76320908140938, -47.890965441408014], [-19.761564499139922, -47.89192640888028], [-19.761463043856125, -47.89394395746905], [-19.763006161636017, -47.89500054771002], [-19.764650731409375, -47.89403959614611]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_f96524d18c9eb2599c014867295aac7c = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_a18ea09575abf0b3c33f62446342e372 = $(`<div id="html_a18ea09575abf0b3c33f62446342e372" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 9<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA DAS OLIVEIRAS (5)<br>&bull; RUA DAS CAJAZEIRAS (1)<br>&bull; RUA DAS GLICINIAS (1)     </div></div>`)[0];
+                popup_f96524d18c9eb2599c014867295aac7c.setContent(html_a18ea09575abf0b3c33f62446342e372);
+            
+        
+
+        polygon_849cc259fc5e7d87f779d43e2fdce4b9.bindPopup(popup_f96524d18c9eb2599c014867295aac7c)
+        ;
+
+        
+    
+    
+            polygon_849cc259fc5e7d87f779d43e2fdce4b9.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:9 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_f5f3a8ac90bf6f72000c2882c88e48dd = L.polygon(
+                [[-19.76649817009547, -47.88904348233133], [-19.76495505889903, -47.887986878530675], [-19.763310508309168, -47.88894786602006], [-19.76320908140938, -47.890965441408014], [-19.764752195898925, -47.89202203843164], [-19.76639673399517, -47.89106106684558]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_68a51dcde89865cd40a41c69b65b153b = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_92da01f54dead99176c059874269bc77 = $(`<div id="html_92da01f54dead99176c059874269bc77" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 3<br>         <b>Armas:</b> 2<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA DAS LARANJEIRAS (5)     </div></div>`)[0];
+                popup_68a51dcde89865cd40a41c69b65b153b.setContent(html_92da01f54dead99176c059874269bc77);
+            
+        
+
+        polygon_f5f3a8ac90bf6f72000c2882c88e48dd.bindPopup(popup_68a51dcde89865cd40a41c69b65b153b)
+        ;
+
+        
+    
+    
+            polygon_f5f3a8ac90bf6f72000c2882c88e48dd.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:3 A:2 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_782bb1ef9c91630800393865e08e253e = L.polygon(
+                [[-19.762396874582116, -47.90710551047648], [-19.760853850417327, -47.9060489374004], [-19.759209198177107, -47.90700981294096], [-19.759107582612177, -47.909027245624685], [-19.760650610057116, -47.91008381188947], [-19.762295249786867, -47.90912295228304]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_1cf8f2af0b0eb5c30355ac3cad41c0ff = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_e9737d887f5fdc060d0e047e9ec1e982 = $(`<div id="html_e9737d887f5fdc060d0e047e9ec1e982" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 8<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; AVENIDA ORLANDO RODRIGUES CUNHA (3)<br>&bull; AVENIDA PADRE EDDIE BERNARDES SILVA (3)<br>&bull; RUA SABURO YAMAMOTO (1)     </div></div>`)[0];
+                popup_1cf8f2af0b0eb5c30355ac3cad41c0ff.setContent(html_e9737d887f5fdc060d0e047e9ec1e982);
+            
+        
+
+        polygon_782bb1ef9c91630800393865e08e253e.bindPopup(popup_1cf8f2af0b0eb5c30355ac3cad41c0ff)
+        ;
+
+        
+    
+    
+            polygon_782bb1ef9c91630800393865e08e253e.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:8 A:0 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_c944c29246f8ea6f9a3144084fc0d049 = L.polygon(
+                [[-19.762091934243784, -47.91315779129166], [-19.760548956902944, -47.91210122683322], [-19.758904285539376, -47.91306206638872], [-19.75880260403307, -47.91507945445934], [-19.760345584650363, -47.916136012094995], [-19.76199024349753, -47.91517518848402]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_7ffca6f5d38eb55ba248911a17651add = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f5bd9892caae4c5a0d8386c2cf57b088 = $(`<div id="html_f5bd9892caae4c5a0d8386c2cf57b088" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 4<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; RUA VIGARIO CARLOS (2)<br>&bull; RUA GUIA LOPES (1)<br>&bull; RUA CALDEIRA JUNIOR (1)     </div></div>`)[0];
+                popup_7ffca6f5d38eb55ba248911a17651add.setContent(html_f5bd9892caae4c5a0d8386c2cf57b088);
+            
+        
+
+        polygon_c944c29246f8ea6f9a3144084fc0d049.bindPopup(popup_7ffca6f5d38eb55ba248911a17651add)
+        ;
+
+        
+    
+    
+            polygon_c944c29246f8ea6f9a3144084fc0d049.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:4 A:0 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_35e2c326c72795057b4edf97c6d4c346 = L.polygon(
+                [[-19.76322791975767, -47.92228384474822], [-19.761685039369322, -47.92122729075527], [-19.760040361422753, -47.92218807835068], [-19.759938576390354, -47.92420540398005], [-19.76148146005052, -47.92526195113285], [-19.76312612547129, -47.92430117949767]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_42d5dcd0e9235162e5827ff324481074 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_046f9e7914d0d5a88bbb3e5ccefb90aa = $(`<div id="html_046f9e7914d0d5a88bbb3e5ccefb90aa" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 23<br>         <b>Armas:</b> 3<br>         <b>Homicídios:</b> 4<br>         <b>Logradouros:</b><br>&bull; RUA MONSENHOR INACIO (7)<br>&bull; RUA EDSON QUIRINO SOUZA (6)<br>&bull; RUA IGUATAMA (6)     </div></div>`)[0];
+                popup_42d5dcd0e9235162e5827ff324481074.setContent(html_046f9e7914d0d5a88bbb3e5ccefb90aa);
+            
+        
+
+        polygon_35e2c326c72795057b4edf97c6d4c346.bindPopup(popup_42d5dcd0e9235162e5827ff324481074)
+        ;
+
+        
+    
+    
+            polygon_35e2c326c72795057b4edf97c6d4c346.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:23 A:3 H:4
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_24a683f434f207723ec170c46302c2d5 = L.polygon(
+                [[-19.76270161705326, -47.9010530959057], [-19.76115854607546, -47.899996514235454], [-19.75951391297661, -47.90095742574102], [-19.75941236336011, -47.902974902994295], [-19.760955437621778, -47.904031477864756], [-19.7626000582161, -47.903070582282965]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_44d9764ccdd8da0a91ce6a15ca8cc0fc = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3967b4ab0b1ccd6acb09d812c99a7b13 = $(`<div id="html_3967b4ab0b1ccd6acb09d812c99a7b13" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 6<br>         <b>Armas:</b> 2<br>         <b>Homicídios:</b> 2<br>         <b>Logradouros:</b><br>&bull; RUA DOS LIRIOS (3)<br>&bull; AVENIDA PADRE EDDIE BERNARDES SILVA (2)<br>&bull; RUA DAS CAMELIAS (2)     </div></div>`)[0];
+                popup_44d9764ccdd8da0a91ce6a15ca8cc0fc.setContent(html_3967b4ab0b1ccd6acb09d812c99a7b13);
+            
+        
+
+        polygon_24a683f434f207723ec170c46302c2d5.bindPopup(popup_44d9764ccdd8da0a91ce6a15ca8cc0fc)
+        ;
+
+        
+    
+    
+            polygon_24a683f434f207723ec170c46302c2d5.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:6 A:2 H:2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_35345fd8c2d4aee5782477b8d0d4fc58 = L.polygon(
+                [[-19.76610990398457, -47.928431598938985], [-19.764567123850323, -47.92737504861304], [-19.762922470958824, -47.92833580428262], [-19.762820610734313, -47.93035309430846], [-19.76436339413852, -47.9314096377825], [-19.766008034497304, -47.930448898083846]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_3024d4fe76d6af8695a8f8f5e38cb54d = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8cc9bf8890ebc65f974386a715b568b2 = $(`<div id="html_8cc9bf8890ebc65f974386a715b568b2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA DOUTOR HEITOR SIVIERI NETO (1)     </div></div>`)[0];
+                popup_3024d4fe76d6af8695a8f8f5e38cb54d.setContent(html_8cc9bf8890ebc65f974386a715b568b2);
+            
+        
+
+        polygon_35345fd8c2d4aee5782477b8d0d4fc58.bindPopup(popup_3024d4fe76d6af8695a8f8f5e38cb54d)
+        ;
+
+        
+    
+    
+            polygon_35345fd8c2d4aee5782477b8d0d4fc58.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_2adb033323ffabfe4f3f532687e53768 = L.polygon(
+                [[-19.761786796059504, -47.919209938220654], [-19.760243865553537, -47.91815338240331], [-19.75859917508462, -47.91911418595363], [-19.758497427644038, -47.92113152936763], [-19.760040361422753, -47.92218807835068], [-19.761685039369322, -47.92122729075527]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_04d0689ddd62011a920f28b37d29529c = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0fb8cfda4fa745dda292a4e8a298b64f = $(`<div id="html_0fb8cfda4fa745dda292a4e8a298b64f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 10<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 2<br>         <b>Logradouros:</b><br>&bull; RUA MONTES CLAROS (4)<br>&bull; RUA DA CONSTITUICAO (3)<br>&bull; RUA CAMPOS SALLES (2)     </div></div>`)[0];
+                popup_04d0689ddd62011a920f28b37d29529c.setContent(html_0fb8cfda4fa745dda292a4e8a298b64f);
+            
+        
+
+        polygon_2adb033323ffabfe4f3f532687e53768.bindPopup(popup_04d0689ddd62011a920f28b37d29529c)
+        ;
+
+        
+    
+    
+            polygon_2adb033323ffabfe4f3f532687e53768.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:10 A:0 H:2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_7fdec9506315ef78cac3865e9a0994a4 = L.polygon(
+                [[-19.76641538055244, -47.922379612045255], [-19.764872553561652, -47.92132305304234], [-19.76322791975767, -47.92228384474822], [-19.76312612547129, -47.92430117949767], [-19.764668955735733, -47.92535773166016], [-19.766313577012927, -47.92439695591486]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_bafad7c6ee5420fd625f58df98934f16 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9b4218b2689c41f9a4146e9131b4c3be = $(`<div id="html_9b4218b2689c41f9a4146e9131b4c3be" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 52<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 3<br>         <b>Logradouros:</b><br>&bull; RUA MONSENHOR INACIO (53)<br>&bull; AVENIDA ABILIO BORGES ARAUJO (3)     </div></div>`)[0];
+                popup_bafad7c6ee5420fd625f58df98934f16.setContent(html_9b4218b2689c41f9a4146e9131b4c3be);
+            
+        
+
+        polygon_7fdec9506315ef78cac3865e9a0994a4.bindPopup(popup_bafad7c6ee5420fd625f58df98934f16)
+        ;
+
+        
+    
+    
+            polygon_7fdec9506315ef78cac3865e9a0994a4.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:52 A:1 H:3
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_39012b2db89cd9051cc14bb089b5554b = L.polygon(
+                [[-19.771654295077397, -47.91344497139555], [-19.7701114779242, -47.912388391905154], [-19.76846693902808, -47.91334924379507], [-19.7683652298045, -47.915366659231104], [-19.769908050239668, -47.91642323189796], [-19.77155257661646, -47.91546239595352]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_617e6d2e0cca0bf7e70ffbd7f1a03f08 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0afcd04ce42ccfea71f256deec9685b4 = $(`<div id="html_0afcd04ce42ccfea71f256deec9685b4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 8<br>         <b>Armas:</b> 6<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA AMINTHAS MARTINS SANTOS (7)<br>&bull; ALAMEDA CARLA BEATRIZ VENANCIO SILVA (2)<br>&bull; AVENIDA VOLVENO MAREGA (2)     </div></div>`)[0];
+                popup_617e6d2e0cca0bf7e70ffbd7f1a03f08.setContent(html_0afcd04ce42ccfea71f256deec9685b4);
+            
+        
+
+        polygon_39012b2db89cd9051cc14bb089b5554b.bindPopup(popup_617e6d2e0cca0bf7e70ffbd7f1a03f08)
+        ;
+
+        
+    
+    
+            polygon_39012b2db89cd9051cc14bb089b5554b.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:8 A:6 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_1fe8ace39a7f750eb9a1a6338fcd8d91 = L.polygon(
+                [[-19.760345584650363, -47.916136012094995], [-19.75880260403307, -47.91507945445934], [-19.75715790104527, -47.916040273959204], [-19.757056191193662, -47.9180576351464], [-19.75859917508462, -47.91911418595363], [-19.760243865553537, -47.91815338240331]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_6a562d3103dd3958d752a368e1df8faf = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8cb25653ea59cccbc6dbe03ae0e3b65f = $(`<div id="html_8cb25653ea59cccbc6dbe03ae0e3b65f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 14<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA VIGARIO CARLOS (6)<br>&bull; RUA GUIA LOPES (3)<br>&bull; RUA INVÁLIDO (1)     </div></div>`)[0];
+                popup_6a562d3103dd3958d752a368e1df8faf.setContent(html_8cb25653ea59cccbc6dbe03ae0e3b65f);
+            
+        
+
+        polygon_1fe8ace39a7f750eb9a1a6338fcd8d91.bindPopup(popup_6a562d3103dd3958d752a368e1df8faf)
+        ;
+
+        
+    
+    
+            polygon_1fe8ace39a7f750eb9a1a6338fcd8d91.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:14 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_4aaa73691ff074846ce0a03320658c53 = L.polygon(
+                [[-19.76846693902808, -47.91334924379507], [-19.766924068471795, -47.91229266931538], [-19.76527948541179, -47.91325351709378], [-19.76517778542642, -47.91527092340794], [-19.766720659262838, -47.91632749106435], [-19.7683652298045, -47.915366659231104]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_a21a1a40e6abd21f44fe65dfd1b489d3 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_4449c99101e89511d429f70f06a989a3 = $(`<div id="html_4449c99101e89511d429f70f06a989a3" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 8<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; ALAMEDA CARLA BEATRIZ VENANCIO SILVA (5)<br>&bull; RUA JOAQUIM JOSE COSTA (2)<br>&bull; RUA ALVARO CAETANO SILVA (1)     </div></div>`)[0];
+                popup_a21a1a40e6abd21f44fe65dfd1b489d3.setContent(html_4449c99101e89511d429f70f06a989a3);
+            
+        
+
+        polygon_4aaa73691ff074846ce0a03320658c53.bindPopup(popup_a21a1a40e6abd21f44fe65dfd1b489d3)
+        ;
+
+        
+    
+    
+            polygon_4aaa73691ff074846ce0a03320658c53.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:8 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_1b5ee22dd831f78f585c91f17e042f8d = L.polygon(
+                [[-19.767635308036702, -47.89817032490478], [-19.766092293728992, -47.8971137314286], [-19.76444773645519, -47.8980746670788], [-19.76434620599212, -47.900092180287366], [-19.765889223588296, -47.901148766969136], [-19.76753376835909, -47.90018784723798]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_52f3d6c0c1c60be6bd5a68c47e3e1b34 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_406d9b6c40b07651f1ece64234c8d798 = $(`<div id="html_406d9b6c40b07651f1ece64234c8d798" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 5<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA NABOR ABADIO OLIVEIRA (7)<br>&bull; RUA DAS AZALEIAS (1)<br>&bull; RUA DAS ACUCENAS (1)     </div></div>`)[0];
+                popup_52f3d6c0c1c60be6bd5a68c47e3e1b34.setContent(html_406d9b6c40b07651f1ece64234c8d798);
+            
+        
+
+        polygon_1b5ee22dd831f78f585c91f17e042f8d.bindPopup(popup_52f3d6c0c1c60be6bd5a68c47e3e1b34)
+        ;
+
+        
+    
+    
+            polygon_1b5ee22dd831f78f585c91f17e042f8d.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:5 A:5 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_dc7e6fa09cc27c4fb4266ab1e6724786 = L.polygon(
+                [[-19.765889223588296, -47.901148766969136], [-19.76434620599212, -47.900092180287366], [-19.76270161705326, -47.9010530959057], [-19.7626000582161, -47.903070582282965], [-19.76414307909797, -47.9041271621647], [-19.765787655531334, -47.903166262470435]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_c4cadc17110e22361344d169005e31a9 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_62260b919c6793bd33980ffc9106f42a = $(`<div id="html_62260b919c6793bd33980ffc9106f42a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 3<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA NABOR ABADIO OLIVEIRA (3)<br>&bull; RUA DAS CAMELIAS (1)<br>&bull; RUA DAS ROSAS (1)     </div></div>`)[0];
+                popup_c4cadc17110e22361344d169005e31a9.setContent(html_62260b919c6793bd33980ffc9106f42a);
+            
+        
+
+        polygon_dc7e6fa09cc27c4fb4266ab1e6724786.bindPopup(popup_c4cadc17110e22361344d169005e31a9)
+        ;
+
+        
+    
+    
+            polygon_dc7e6fa09cc27c4fb4266ab1e6724786.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:5 A:3 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_b8a5d3c722f43ca8679157fa9fad712d = L.polygon(
+                [[-19.764974319500578, -47.91930569138706], [-19.7634314423868, -47.91824913055956], [-19.761786796059504, -47.919209938220654], [-19.761685039369322, -47.92122729075527], [-19.76322791975767, -47.92228384474822], [-19.764872553561652, -47.92132305304234]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_a8eee4240f81e217e9b440ead31c7c8f = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_cd01767253db9b6107674dfc783462e2 = $(`<div id="html_cd01767253db9b6107674dfc783462e2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 26<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 2<br>         <b>Logradouros:</b><br>&bull; RUA POCOS CALDAS (23)<br>&bull; RUA SAO MATEUS (1)<br>&bull; RUA SANTO AGOSTINHO (1)     </div></div>`)[0];
+                popup_a8eee4240f81e217e9b440ead31c7c8f.setContent(html_cd01767253db9b6107674dfc783462e2);
+            
+        
+
+        polygon_b8a5d3c722f43ca8679157fa9fad712d.bindPopup(popup_a8eee4240f81e217e9b440ead31c7c8f)
+        ;
+
+        
+    
+    
+            polygon_b8a5d3c722f43ca8679157fa9fad712d.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:26 A:0 H:2
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_8fa1aec8780ba72f597e3f5ef9b3a13c = L.polygon(
+                [[-19.75859917508462, -47.91911418595363], [-19.757056191193662, -47.9180576351464], [-19.755411456591194, -47.91901843458597], [-19.755309718401097, -47.92103576887943], [-19.756852705562945, -47.92209231285262], [-19.758497427644038, -47.92113152936763]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_22f64d5451e35472b166a25a6bb4b6da = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0a16f3c6888f3002eb6380796a2c9ca7 = $(`<div id="html_0a16f3c6888f3002eb6380796a2c9ca7" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 12<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; RUA JOAO PESSOA (10)<br>&bull; RUA CASTRO ALVES (2)<br>&bull; RUA GUIA LOPES (1)     </div></div>`)[0];
+                popup_22f64d5451e35472b166a25a6bb4b6da.setContent(html_0a16f3c6888f3002eb6380796a2c9ca7);
+            
+        
+
+        polygon_8fa1aec8780ba72f597e3f5ef9b3a13c.bindPopup(popup_22f64d5451e35472b166a25a6bb4b6da)
+        ;
+
+        
+    
+    
+            polygon_8fa1aec8780ba72f597e3f5ef9b3a13c.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:12 A:1 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_fcced91e1e7b11880d4e2d0a53af69e0 = L.polygon(
+                [[-19.76148146005052, -47.92526195113285], [-19.759938576390354, -47.92420540398005], [-19.758293866834094, -47.92516617150512], [-19.758192053466317, -47.92718347021895], [-19.75973494039552, -47.92824001052596], [-19.76137963742349, -47.92727925896616]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_f4c6323bf0fc23b89329abdd5faf9cdb = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_9e495e08240fc7a3528473c5503b392b = $(`<div id="html_9e495e08240fc7a3528473c5503b392b" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 2<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; AVENIDA PRUDENTE DE MORAIS (1)<br>&bull; RUA TENENTE WENCESLAU DE OLIVEIRA (1)<br>&bull; RUA CAMPOS SALES (1)     </div></div>`)[0];
+                popup_f4c6323bf0fc23b89329abdd5faf9cdb.setContent(html_9e495e08240fc7a3528473c5503b392b);
+            
+        
+
+        polygon_fcced91e1e7b11880d4e2d0a53af69e0.bindPopup(popup_f4c6323bf0fc23b89329abdd5faf9cdb)
+        ;
+
+        
+    
+    
+            polygon_fcced91e1e7b11880d4e2d0a53af69e0.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:2 A:1 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_49c60e3dea0837edb750910c290d51ea = L.polygon(
+                [[-19.76527948541179, -47.91325351709378], [-19.763736561459613, -47.91219694762473], [-19.762091934243784, -47.91315779129166], [-19.76199024349753, -47.91517518848402], [-19.76353317072798, -47.91623175113003], [-19.76517778542642, -47.91527092340794]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_29206ac10fec5838269e40570dbcbe6c = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_8695fba6b0ab20f6d0bd51726af215ae = $(`<div id="html_8695fba6b0ab20f6d0bd51726af215ae" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 2<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA CONTORNO (2)<br>&bull; AVENIDA INVÁLIDO (1)     </div></div>`)[0];
+                popup_29206ac10fec5838269e40570dbcbe6c.setContent(html_8695fba6b0ab20f6d0bd51726af215ae);
+            
+        
+
+        polygon_49c60e3dea0837edb750910c290d51ea.bindPopup(popup_29206ac10fec5838269e40570dbcbe6c)
+        ;
+
+        
+    
+    
+            polygon_49c60e3dea0837edb750910c290d51ea.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:2 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_89655b880cd47969f3f00e9ad0c997e7 = L.polygon(
+                [[-19.765584453448103, -47.90720120891093], [-19.764041482668464, -47.90614463082379], [-19.762396874582116, -47.90710551047648], [-19.762295249786867, -47.90912295228304], [-19.763838223848495, -47.91017952355864], [-19.765482819423408, -47.90921865984043]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_caf5a319a2cf26735a04753f451f49c8 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_a04019081176c80cb2f03364178e9b36 = $(`<div id="html_a04019081176c80cb2f03364178e9b36" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 4<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA MARIANA QUEIROZ SILVEIRA (1)<br>&bull; RUA MAURO SABINO LOES (1)<br>&bull; RUA TENENTE JOAO DIAS (1)     </div></div>`)[0];
+                popup_caf5a319a2cf26735a04753f451f49c8.setContent(html_a04019081176c80cb2f03364178e9b36);
+            
+        
+
+        polygon_89655b880cd47969f3f00e9ad0c997e7.bindPopup(popup_caf5a319a2cf26735a04753f451f49c8)
+        ;
+
+        
+    
+    
+            polygon_89655b880cd47969f3f00e9ad0c997e7.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:4 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_fc0257c3ab77c1f3926df96d0dd3c4dc = L.polygon(
+                [[-19.758293866834094, -47.92516617150512], [-19.756750929785426, -47.92410962936197], [-19.75510617610176, -47.925070392776966], [-19.755004371994097, -47.927087682371386], [-19.75654731230997, -47.92814421766899], [-19.758192053466317, -47.92718347021895]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_c5430695e7734dd2acf99189443926a4 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_eede73bc7c71ac4484d6d09a0ef5dc86 = $(`<div id="html_eede73bc7c71ac4484d6d09a0ef5dc86" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 9<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA VIGARIO CARLOS (5)<br>&bull; AVENIDA INCONFIDENTES (2)<br>&bull; RUA TENENTE WENCESLAU DE OLIVEIRA (1)     </div></div>`)[0];
+                popup_c5430695e7734dd2acf99189443926a4.setContent(html_eede73bc7c71ac4484d6d09a0ef5dc86);
+            
+        
+
+        polygon_fc0257c3ab77c1f3926df96d0dd3c4dc.bindPopup(popup_c5430695e7734dd2acf99189443926a4)
+        ;
+
+        
+    
+    
+            polygon_fc0257c3ab77c1f3926df96d0dd3c4dc.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:9 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_9bc867db14f4d173ed9fd114810237bb = L.polygon(
+                [[-19.764668955735733, -47.92535773166016], [-19.76312612547129, -47.92430117949767], [-19.76148146005052, -47.92526195113285], [-19.76137963742349, -47.92727925896616], [-19.762922470958824, -47.92833580428262], [-19.764567123850323, -47.92737504861304]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_1ac54acc3845c15bc4a51fe0ae2c9d91 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_e421bce3ddbc69dc757b41bff5a8bfc4 = $(`<div id="html_e421bce3ddbc69dc757b41bff5a8bfc4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA NELSON FREIRE (2)<br>&bull; RUA SALDANHA MARINHO (2)<br>&bull; RUA DOUTOR HEITOR SIVIERI NETO (1)     </div></div>`)[0];
+                popup_1ac54acc3845c15bc4a51fe0ae2c9d91.setContent(html_e421bce3ddbc69dc757b41bff5a8bfc4);
+            
+        
+
+        polygon_9bc867db14f4d173ed9fd114810237bb.bindPopup(popup_1ac54acc3845c15bc4a51fe0ae2c9d91)
+        ;
+
+        
+    
+    
+            polygon_9bc867db14f4d173ed9fd114810237bb.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:5 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_eb7737dadeda73a467e6f08479f78bc6 = L.polygon(
+                [[-19.761564499139922, -47.89192640888028], [-19.760021331277635, -47.89086981686882], [-19.758376704843045, -47.89183078022732], [-19.758275258765877, -47.89384831969047], [-19.759818429916656, -47.89490490491951], [-19.761463043856125, -47.89394395746905]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_dfeaf4e578bda929fa3d7e6474f38499 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f375097d837bf0e36bcb19d520c5e7b6 = $(`<div id="html_f375097d837bf0e36bcb19d520c5e7b6" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; RUA TURMALINAS (4)<br>&bull; AVENIDA PADRE EDDIE BERNARDES SILVA (3)     </div></div>`)[0];
+                popup_dfeaf4e578bda929fa3d7e6474f38499.setContent(html_f375097d837bf0e36bcb19d520c5e7b6);
+            
+        
+
+        polygon_eb7737dadeda73a467e6f08479f78bc6.bindPopup(popup_dfeaf4e578bda929fa3d7e6474f38499)
+        ;
+
+        
+    
+    
+            polygon_eb7737dadeda73a467e6f08479f78bc6.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:5 A:1 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d2468aa4eddec98464b42f841bd3d602 = L.polygon(
+                [[-19.763006161636017, -47.89500054771002], [-19.761463043856125, -47.89394395746905], [-19.759818429916656, -47.89490490491951], [-19.75971694625567, -47.89692242669879], [-19.76126006732311, -47.897979010151474], [-19.762904668764005, -47.897018078614394]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_757aa8b99bd176eac82b2b139f40ecff = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_bce92b3c698a45098ff06183b9a8c97f = $(`<div id="html_bce92b3c698a45098ff06183b9a8c97f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 2<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA PADRE EDDIE BERNARDES SILVA (1)<br>&bull; RUA DAS PAPOULAS (1)     </div></div>`)[0];
+                popup_757aa8b99bd176eac82b2b139f40ecff.setContent(html_bce92b3c698a45098ff06183b9a8c97f);
+            
+        
+
+        polygon_d2468aa4eddec98464b42f841bd3d602.bindPopup(popup_757aa8b99bd176eac82b2b139f40ecff)
+        ;
+
+        
+    
+    
+            polygon_d2468aa4eddec98464b42f841bd3d602.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:2 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_74139535ed9546074d6e2a21c938bc12 = L.polygon(
+                [[-19.763838223848495, -47.91017952355864], [-19.762295249786867, -47.90912295228304], [-19.760650610057116, -47.91008381188947], [-19.760548956902944, -47.91210122683322], [-19.762091934243784, -47.91315779129166], [-19.763736561459613, -47.91219694762473]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_8bfba019a858d3ac0aaf4535c3f85f6b = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_ed448e055da1e2512a1824051ac010c5 = $(`<div id="html_ed448e055da1e2512a1824051ac010c5" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 4<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; RUA ANTONIO BARBOSA (2)<br>&bull; AVENIDA ROSA MARIA FRANGE MONTES (1)<br>&bull; RUA AGUSTINHO AMANCIO SOUZA (1)     </div></div>`)[0];
+                popup_8bfba019a858d3ac0aaf4535c3f85f6b.setContent(html_ed448e055da1e2512a1824051ac010c5);
+            
+        
+
+        polygon_74139535ed9546074d6e2a21c938bc12.bindPopup(popup_8bfba019a858d3ac0aaf4535c3f85f6b)
+        ;
+
+        
+    
+    
+            polygon_74139535ed9546074d6e2a21c938bc12.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:4 A:0 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d117b4a357ed94ec232769c6e4e79997 = L.polygon(
+                [[-19.755411456591194, -47.91901843458597], [-19.753868419322462, -47.9179618887888], [-19.752223640594536, -47.91892268411766], [-19.752121911655777, -47.920940009290646], [-19.75366495219357, -47.921996548254015], [-19.755309718401097, -47.92103576887943]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_ebe740a0efd1d38332ea5d1b15aa964b = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_99ead1180a79efe3ab4a41b22d628984 = $(`<div id="html_99ead1180a79efe3ab4a41b22d628984" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA JOAO PESSOA (1)     </div></div>`)[0];
+                popup_ebe740a0efd1d38332ea5d1b15aa964b.setContent(html_99ead1180a79efe3ab4a41b22d628984);
+            
+        
+
+        polygon_d117b4a357ed94ec232769c6e4e79997.bindPopup(popup_ebe740a0efd1d38332ea5d1b15aa964b)
+        ;
+
+        
+    
+    
+            polygon_d117b4a357ed94ec232769c6e4e79997.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_53d647426ecd665814e3e9dff37a86a9 = L.polygon(
+                [[-19.773400479889347, -47.9104666639606], [-19.771857666020892, -47.9094100776523], [-19.77021315877989, -47.910370949594196], [-19.7701114779242, -47.912388391905154], [-19.771654295077397, -47.91344497139555], [-19.773298789801554, -47.91248411539409]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_946982e7cd0f890612b44b7a21ac36ad = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_350c9747b5ae3c4c163f40bf446f6ae1 = $(`<div id="html_350c9747b5ae3c4c163f40bf446f6ae1" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA ODAIR RIBEIRO SANCHEZ (1)     </div></div>`)[0];
+                popup_946982e7cd0f890612b44b7a21ac36ad.setContent(html_350c9747b5ae3c4c163f40bf446f6ae1);
+            
+        
+
+        polygon_53d647426ecd665814e3e9dff37a86a9.bindPopup(popup_946982e7cd0f890612b44b7a21ac36ad)
+        ;
+
+        
+    
+    
+            polygon_53d647426ecd665814e3e9dff37a86a9.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_455775d0a781eaf8dfe69a18b9dcc349 = L.polygon(
+                [[-19.759209198177107, -47.90700981294096], [-19.757666120634376, -47.90595324487592], [-19.75602142424837, -47.9069141163044], [-19.755919817914616, -47.908931539865335], [-19.75746289873566, -47.90998810111935], [-19.759107582612177, -47.909027245624685]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_42454356141c4fc0428be119ea3ade16 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_33ae7948271141ee878ec187128f0eb4 = $(`<div id="html_33ae7948271141ee878ec187128f0eb4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 2<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA LEOPOLDINO DE OLIVEIRA (4)<br>&bull; AVENIDA ORLANDO RODRIGUES CUNHA (3)     </div></div>`)[0];
+                popup_42454356141c4fc0428be119ea3ade16.setContent(html_33ae7948271141ee878ec187128f0eb4);
+            
+        
+
+        polygon_455775d0a781eaf8dfe69a18b9dcc349.bindPopup(popup_42454356141c4fc0428be119ea3ade16)
+        ;
+
+        
+    
+    
+            polygon_455775d0a781eaf8dfe69a18b9dcc349.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:5 A:2 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_404b3b45cdc03fca75dc29ed136024de = L.polygon(
+                [[-19.76353317072798, -47.91623175113003], [-19.76199024349753, -47.91517518848402], [-19.760345584650363, -47.916136012094995], [-19.760243865553537, -47.91815338240331], [-19.761786796059504, -47.919209938220654], [-19.7634314423868, -47.91824913055956]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_aad3e4c0eb9bf13a47ac76332a8c1a0d = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3943904925c1bcc3053dca6eef3c43aa = $(`<div id="html_3943904925c1bcc3053dca6eef3c43aa" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 4<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; AVENIDA PRUDENTE DE MORAIS (3)<br>&bull; RUA SANTO AGOSTINHO (1)<br>&bull; RUA EDUARDO FORMIGA (1)     </div></div>`)[0];
+                popup_aad3e4c0eb9bf13a47ac76332a8c1a0d.setContent(html_3943904925c1bcc3053dca6eef3c43aa);
+            
+        
+
+        polygon_404b3b45cdc03fca75dc29ed136024de.bindPopup(popup_aad3e4c0eb9bf13a47ac76332a8c1a0d)
+        ;
+
+        
+    
+    
+            polygon_404b3b45cdc03fca75dc29ed136024de.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:4 A:0 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_0d133858916620927df232fb00131045 = L.polygon(
+                [[-19.77309534364318, -47.91651897363086], [-19.77155257661646, -47.91546239595352], [-19.769908050239668, -47.91642323189796], [-19.769806303412388, -47.91844062957012], [-19.771349073720152, -47.91949720041804], [-19.772993587574163, -47.91853638042444]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_a59520f00d21d2a73cd5b9cbab356fe3 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_2c662ff19bd967f663dc79cb3eaa958c = $(`<div id="html_2c662ff19bd967f663dc79cb3eaa958c" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 4<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA VOLVENO MAREGA (2)<br>&bull; AVENIDA MIGUEL ARCHANJO BORGES (2)<br>&bull; AVENIDA AMINTHAS MARTINS SANTOS (1)     </div></div>`)[0];
+                popup_a59520f00d21d2a73cd5b9cbab356fe3.setContent(html_2c662ff19bd967f663dc79cb3eaa958c);
+            
+        
+
+        polygon_0d133858916620927df232fb00131045.bindPopup(popup_a59520f00d21d2a73cd5b9cbab356fe3)
+        ;
+
+        
+    
+    
+            polygon_0d133858916620927df232fb00131045.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:4 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_00b82eb4384d6508613279394b19778b = L.polygon(
+                [[-19.755716539313823, -47.91296634238491], [-19.754173455217245, -47.91190978794757], [-19.752528695582424, -47.912870619280255], [-19.752427032558646, -47.914887989107626], [-19.753970119927985, -47.91594453672268], [-19.75561486704835, -47.914983721333876]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_d4a1ddc40a775ab1fea3ddcb72273dae = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_b21e9dbabec3c8d161351d5db0bd0f2a = $(`<div id="html_b21e9dbabec3c8d161351d5db0bd0f2a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA LEOPOLDINO DE OLIVEIRA (1)     </div></div>`)[0];
+                popup_d4a1ddc40a775ab1fea3ddcb72273dae.setContent(html_b21e9dbabec3c8d161351d5db0bd0f2a);
+            
+        
+
+        polygon_00b82eb4384d6508613279394b19778b.bindPopup(popup_d4a1ddc40a775ab1fea3ddcb72273dae)
+        ;
+
+        
+    
+    
+            polygon_00b82eb4384d6508613279394b19778b.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_2c477a0a0c9e4fd9c975d26d9b50bd30 = L.polygon(
+                [[-19.76126006732311, -47.897979010151474], [-19.75971694625567, -47.89692242669879], [-19.758072300655765, -47.89788335412277], [-19.757970788624384, -47.899900849082236], [-19.75951391297661, -47.90095742574102], [-19.76115854607546, -47.899996514235454]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_0e41ca3b2d3117bffe29b60fff720d70 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_a62186d410fb551e3242f924c68beb65 = $(`<div id="html_a62186d410fb551e3242f924c68beb65" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 5<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA TURMALINAS (3)<br>&bull; AVENIDA NIZA MARQUES GUARITA (1)<br>&bull; RUA DAS AZALEIAS (1)     </div></div>`)[0];
+                popup_0e41ca3b2d3117bffe29b60fff720d70.setContent(html_a62186d410fb551e3242f924c68beb65);
+            
+        
+
+        polygon_2c477a0a0c9e4fd9c975d26d9b50bd30.bindPopup(popup_0e41ca3b2d3117bffe29b60fff720d70)
+        ;
+
+        
+    
+    
+            polygon_2c477a0a0c9e4fd9c975d26d9b50bd30.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:5 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_3a3dddfea0d53898b19d7599f777c250 = L.polygon(
+                [[-19.756852705562945, -47.92209231285262], [-19.755309718401097, -47.92103576887943], [-19.75366495219357, -47.921996548254015], [-19.75356318567178, -47.92401385564343], [-19.75510617610176, -47.925070392776966], [-19.756750929785426, -47.92410962936197]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_0d73748566ffd6b9d43fb546cb2b8dcf = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_5f52fa4d6cbf5d84221a9069b99dd467 = $(`<div id="html_5f52fa4d6cbf5d84221a9069b99dd467" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA GUIA LOPES (1)<br>&bull; RUA JOAO ALFREDO (1)     </div></div>`)[0];
+                popup_0d73748566ffd6b9d43fb546cb2b8dcf.setContent(html_5f52fa4d6cbf5d84221a9069b99dd467);
+            
+        
+
+        polygon_3a3dddfea0d53898b19d7599f777c250.bindPopup(popup_0d73748566ffd6b9d43fb546cb2b8dcf)
+        ;
+
+        
+    
+    
+            polygon_3a3dddfea0d53898b19d7599f777c250.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:1 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_eec103349bbccc25fc9d515eabd3543a = L.polygon(
+                [[-19.75951391297661, -47.90095742574102], [-19.757970788624384, -47.899900849082236], [-19.75632611137363, -47.90086175647505], [-19.75622457097867, -47.90287922460442], [-19.757767698612902, -47.90393579446365], [-19.75941236336011, -47.902974902994295]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_085041c8150e3e7dac7225b28839ffef = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_c5ea0f298e09986659a67ac335591224 = $(`<div id="html_c5ea0f298e09986659a67ac335591224" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 2<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA NIZA MARQUES GUARITA (2)<br>&bull; RUA TURMALINAS (1)     </div></div>`)[0];
+                popup_085041c8150e3e7dac7225b28839ffef.setContent(html_c5ea0f298e09986659a67ac335591224);
+            
+        
+
+        polygon_eec103349bbccc25fc9d515eabd3543a.bindPopup(popup_085041c8150e3e7dac7225b28839ffef)
+        ;
+
+        
+    
+    
+            polygon_eec103349bbccc25fc9d515eabd3543a.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:2 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_44e9459e2f17cfa1fe3c595ca0ab9a99 = L.polygon(
+                [[-19.753359586717433, -47.928048425711694], [-19.7518165930221, -47.92699189542345], [-19.750171763633197, -47.92795263465406], [-19.75006994046847, -47.92996988820449], [-19.751612937426376, -47.931026411641824], [-19.75325775428645, -47.930065688380864]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_3ae346a31893a8da3077a7909a95acbe = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_746ead5c0f27a8ff8f41fb4089c77cef = $(`<div id="html_746ead5c0f27a8ff8f41fb4089c77cef" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 2<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; PRACA DOUTOR THOMAZ ULHOA (1)<br>&bull; RUA ANDRADAS (1)     </div></div>`)[0];
+                popup_3ae346a31893a8da3077a7909a95acbe.setContent(html_746ead5c0f27a8ff8f41fb4089c77cef);
+            
+        
+
+        polygon_44e9459e2f17cfa1fe3c595ca0ab9a99.bindPopup(popup_3ae346a31893a8da3077a7909a95acbe)
+        ;
+
+        
+    
+    
+            polygon_44e9459e2f17cfa1fe3c595ca0ab9a99.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:2 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_175263dfcae771dcd74c5a5223f5533d = L.polygon(
+                [[-19.751918387868766, -47.924974614948376], [-19.7503753440647, -47.923918082824414], [-19.748730502150433, -47.924878838019346], [-19.748628716565626, -47.92689610937515], [-19.750171763633197, -47.92795263465406], [-19.7518165930221, -47.92699189542345]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_58b9cc1c27a0d80e2bbe3468a45b07d2 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_6c49871b37c92369ab6781d97d88d064 = $(`<div id="html_6c49871b37c92369ab6781d97d88d064" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA CONDE PRADOS (1)     </div></div>`)[0];
+                popup_58b9cc1c27a0d80e2bbe3468a45b07d2.setContent(html_6c49871b37c92369ab6781d97d88d064);
+            
+        
+
+        polygon_175263dfcae771dcd74c5a5223f5533d.bindPopup(popup_58b9cc1c27a0d80e2bbe3468a45b07d2)
+        ;
+
+        
+    
+    
+            polygon_175263dfcae771dcd74c5a5223f5533d.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_ea7589fff1db08fff7b7b79b01154527 = L.polygon(
+                [[-19.762922470958824, -47.92833580428262], [-19.76137963742349, -47.92727925896616], [-19.75973494039552, -47.92824001052596], [-19.759633089434665, -47.93025729143283], [-19.7611759262381, -47.93131382989764], [-19.762820610734313, -47.93035309430846]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_28a87ed5ff1b6fef3a496be6a9100cbd = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_78331f92fd2e78bb7d2a155e19e81a45 = $(`<div id="html_78331f92fd2e78bb7d2a155e19e81a45" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 3 natureza(s)</div>         <b>Tráfico:</b> 2<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; RUA CONEGO CEZAR BORGES (2)<br>&bull; RUA VISCONDE ABAETE (1)<br>&bull; RUA DOUTOR LUDOVICE (1)     </div></div>`)[0];
+                popup_28a87ed5ff1b6fef3a496be6a9100cbd.setContent(html_78331f92fd2e78bb7d2a155e19e81a45);
+            
+        
+
+        polygon_ea7589fff1db08fff7b7b79b01154527.bindPopup(popup_28a87ed5ff1b6fef3a496be6a9100cbd)
+        ;
+
+        
+    
+    
+            polygon_ea7589fff1db08fff7b7b79b01154527.bindTooltip(
+                `<div>
+                     3 natureza(s) | T:2 A:1 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_e41c64c7ed8b2cadf33d1cda1e0e1aee = L.polygon(
+                [[-19.76444773645519, -47.8980746670788], [-19.762904668764005, -47.897018078614394], [-19.76126006732311, -47.897979010151474], [-19.76115854607546, -47.899996514235454], [-19.76270161705326, -47.9010530959057], [-19.76434620599212, -47.900092180287366]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_72ea4698399ba43b1f84b58077635308 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_1d9356ffe60f5472de3f25608bf026b2 = $(`<div id="html_1d9356ffe60f5472de3f25608bf026b2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 4<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA DAS ORQUIDEAS (2)<br>&bull; RUA DAS MAGNOLIAS (1)<br>&bull; RUA DAS ACUCENAS (1)     </div></div>`)[0];
+                popup_72ea4698399ba43b1f84b58077635308.setContent(html_1d9356ffe60f5472de3f25608bf026b2);
+            
+        
+
+        polygon_e41c64c7ed8b2cadf33d1cda1e0e1aee.bindPopup(popup_72ea4698399ba43b1f84b58077635308)
+        ;
+
+        
+    
+    
+            polygon_e41c64c7ed8b2cadf33d1cda1e0e1aee.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:4 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_ed0c96bb339da65a6bffe672c86abcf9 = L.polygon(
+                [[-19.757988360809083, -47.93121802291258], [-19.756445470613606, -47.93016148945698], [-19.75480069786674, -47.93112221682731], [-19.75469882784862, -47.93313946167916], [-19.756241721307585, -47.93419598827773], [-19.757886481521204, -47.93323527688272]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_474495ffd853e42f875298b17f76307f = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_ec23a5490283e6721555f34ee65a54d2 = $(`<div id="html_ec23a5490283e6721555f34ee65a54d2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA GETULIO GUARITA (1)<br>&bull; RUA DA CONSTITUICAO (1)     </div></div>`)[0];
+                popup_474495ffd853e42f875298b17f76307f.setContent(html_ec23a5490283e6721555f34ee65a54d2);
+            
+        
+
+        polygon_ed0c96bb339da65a6bffe672c86abcf9.bindPopup(popup_474495ffd853e42f875298b17f76307f)
+        ;
+
+        
+    
+    
+            polygon_ed0c96bb339da65a6bffe672c86abcf9.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:1 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_4dc2963814c3da74ed32454f1b7ae775 = L.polygon(
+                [[-19.768161745392554, -47.919401445452856], [-19.76661892167819, -47.91834487961516], [-19.764974319500578, -47.91930569138706], [-19.764872553561652, -47.92132305304234], [-19.76641538055244, -47.922379612045255], [-19.76805997020575, -47.921418816228886]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_9173a09031e41163528195676725610e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_f423d23f771d93f77dcda3f9c67c0415 = $(`<div id="html_f423d23f771d93f77dcda3f9c67c0415" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA SAO VICENTE (1)<br>&bull; RUA SAO MATEUS (1)     </div></div>`)[0];
+                popup_9173a09031e41163528195676725610e.setContent(html_f423d23f771d93f77dcda3f9c67c0415);
+            
+        
+
+        polygon_4dc2963814c3da74ed32454f1b7ae775.bindPopup(popup_9173a09031e41163528195676725610e)
+        ;
+
+        
+    
+    
+            polygon_4dc2963814c3da74ed32454f1b7ae775.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:1 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d79692d85e2ff5fd561bcd7723f90f12 = L.polygon(
+                [[-19.77021315877989, -47.910370949594196], [-19.7686702915065, -47.90931436829685], [-19.76702574009451, -47.910275236126886], [-19.766924068471795, -47.91229266931538], [-19.76846693902808, -47.91334924379507], [-19.7701114779242, -47.912388391905154]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_9503ee03bbbbd22070e017baa4a9d77e = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_b0fc67e460ee1bd0b3f455aff6727168 = $(`<div id="html_b0fc67e460ee1bd0b3f455aff6727168" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA MOACIR FERREIRA CRUZ (1)     </div></div>`)[0];
+                popup_9503ee03bbbbd22070e017baa4a9d77e.setContent(html_b0fc67e460ee1bd0b3f455aff6727168);
+            
+        
+
+        polygon_d79692d85e2ff5fd561bcd7723f90f12.bindPopup(popup_9503ee03bbbbd22070e017baa4a9d77e)
+        ;
+
+        
+    
+    
+            polygon_d79692d85e2ff5fd561bcd7723f90f12.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_48e379864bf9e66f3f87ca41a1470d34 = L.polygon(
+                [[-19.763310508309168, -47.88894786602006], [-19.761767343738146, -47.88789126723182], [-19.760122748976052, -47.8888522506071], [-19.760021331277635, -47.89086981686882], [-19.761564499139922, -47.89192640888028], [-19.76320908140938, -47.890965441408014]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_7b74db6b222bb6592795ab56be38b758 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_00bb676f79c1a216a359ba38469098bd = $(`<div id="html_00bb676f79c1a216a359ba38469098bd" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA DAS LARANJEIRAS (1)     </div></div>`)[0];
+                popup_7b74db6b222bb6592795ab56be38b758.setContent(html_00bb676f79c1a216a359ba38469098bd);
+            
+        
+
+        polygon_48e379864bf9e66f3f87ca41a1470d34.bindPopup(popup_7b74db6b222bb6592795ab56be38b758)
+        ;
+
+        
+    
+    
+            polygon_48e379864bf9e66f3f87ca41a1470d34.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_d91eeb744a3acc090bc5b61fa860a705 = L.polygon(
+                [[-19.76785635387445, -47.925453513087085], [-19.766313577012927, -47.92439695591486], [-19.764668955735733, -47.92535773166016], [-19.764567123850323, -47.92737504861304], [-19.76610990398457, -47.928431598938985], [-19.767754512731532, -47.92747083915958]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_507b852f3a84f6c296b0d8e3afe6f936 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0f3e10bb7e54c822aeac2f11a773c117 = $(`<div id="html_0f3e10bb7e54c822aeac2f11a773c117" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA NELSON FREIRE (1)     </div></div>`)[0];
+                popup_507b852f3a84f6c296b0d8e3afe6f936.setContent(html_0f3e10bb7e54c822aeac2f11a773c117);
+            
+        
+
+        polygon_d91eeb744a3acc090bc5b61fa860a705.bindPopup(popup_507b852f3a84f6c296b0d8e3afe6f936)
+        ;
+
+        
+    
+    
+            polygon_d91eeb744a3acc090bc5b61fa860a705.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_13a2269383779d47eb091950b10795b2 = L.polygon(
+                [[-19.760650610057116, -47.91008381188947], [-19.759107582612177, -47.909027245624685], [-19.75746289873566, -47.90998810111935], [-19.75736125481706, -47.912005506940844], [-19.758904285539376, -47.91306206638872], [-19.760548956902944, -47.91210122683322]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_b88ff3fee685b8f455145fee6a5587ad = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_353484c108fb5e01f4b0c4f9ba8b4208 = $(`<div id="html_353484c108fb5e01f4b0c4f9ba8b4208" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA JOSE MATEUS SOBRINHO (1)     </div></div>`)[0];
+                popup_b88ff3fee685b8f455145fee6a5587ad.setContent(html_353484c108fb5e01f4b0c4f9ba8b4208);
+            
+        
+
+        polygon_13a2269383779d47eb091950b10795b2.bindPopup(popup_b88ff3fee685b8f455145fee6a5587ad)
+        ;
+
+        
+    
+    
+            polygon_13a2269383779d47eb091950b10795b2.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_5906e268e8f4d174a3beab22ed4f81a3 = L.polygon(
+                [[-19.769908050239668, -47.91642323189796], [-19.7683652298045, -47.915366659231104], [-19.766720659262838, -47.91632749106435], [-19.76661892167819, -47.91834487961516], [-19.768161745392554, -47.919401445452856], [-19.769806303412388, -47.91844062957012]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_8d1948eb273148800ddd0964b0359636 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_44bd44968f472aee211c412dc1b716e4 = $(`<div id="html_44bd44968f472aee211c412dc1b716e4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; PRACA LAGO AZUL (1)<br>&bull; AVENIDA SILVIO VIEIRA SILVA (1)     </div></div>`)[0];
+                popup_8d1948eb273148800ddd0964b0359636.setContent(html_44bd44968f472aee211c412dc1b716e4);
+            
+        
+
+        polygon_5906e268e8f4d174a3beab22ed4f81a3.bindPopup(popup_8d1948eb273148800ddd0964b0359636)
+        ;
+
+        
+    
+    
+            polygon_5906e268e8f4d174a3beab22ed4f81a3.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:1 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_bf22554d771fd545ddc357e6f8d3de06 = L.polygon(
+                [[-19.76436339413852, -47.9314096377825], [-19.762820610734313, -47.93035309430846], [-19.7611759262381, -47.93131382989764], [-19.761074037681325, -47.93333109298614], [-19.762616824352705, -47.934387629602654], [-19.764261496313715, -47.933426909989436]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_8b93f84c1719f1259d0830b4ee611883 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_dd30352834fc7a5acf6056d0e641b3e5 = $(`<div id="html_dd30352834fc7a5acf6056d0e641b3e5" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; AVENIDA NELSON FREIRE (1)     </div></div>`)[0];
+                popup_8b93f84c1719f1259d0830b4ee611883.setContent(html_dd30352834fc7a5acf6056d0e641b3e5);
+            
+        
+
+        polygon_bf22554d771fd545ddc357e6f8d3de06.bindPopup(popup_8b93f84c1719f1259d0830b4ee611883)
+        ;
+
+        
+    
+    
+            polygon_bf22554d771fd545ddc357e6f8d3de06.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_451533b2d30164c63a0aea5e9a799781 = L.polygon(
+                [[-19.758904285539376, -47.91306206638872], [-19.75736125481706, -47.912005506940844], [-19.755716539313823, -47.91296634238491], [-19.75561486704835, -47.914983721333876], [-19.75715790104527, -47.916040273959204], [-19.75880260403307, -47.91507945445934]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_66818b1564f1cf8d44f8c2e2d5102ca9 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_0e448d1b24ff01d5e505f11b28d04cb4 = $(`<div id="html_0e448d1b24ff01d5e505f11b28d04cb4" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA BARAO PONTE ALTA (1)     </div></div>`)[0];
+                popup_66818b1564f1cf8d44f8c2e2d5102ca9.setContent(html_0e448d1b24ff01d5e505f11b28d04cb4);
+            
+        
+
+        polygon_451533b2d30164c63a0aea5e9a799781.bindPopup(popup_66818b1564f1cf8d44f8c2e2d5102ca9)
+        ;
+
+        
+    
+    
+            polygon_451533b2d30164c63a0aea5e9a799781.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:1 A:0 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_323a05a63eec4a9af9ae508ebc60a179 = L.polygon(
+                [[-19.75973494039552, -47.92824001052596], [-19.758192053466317, -47.92718347021895], [-19.75654731230997, -47.92814421766899], [-19.756445470613606, -47.93016148945698], [-19.757988360809083, -47.93121802291258], [-19.759633089434665, -47.93025729143283]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#E67E22", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_f97112856318a159a4b6a69905b8f593 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_640a349848e996a6fab01f6b99a0edbd = $(`<div id="html_640a349848e996a6fab01f6b99a0edbd" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 2 natureza(s)</div>         <b>Tráfico:</b> 1<br>         <b>Armas:</b> 2<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA CONDE PRADOS (2)<br>&bull; AVENIDA GETULIO GUARITA (1)     </div></div>`)[0];
+                popup_f97112856318a159a4b6a69905b8f593.setContent(html_640a349848e996a6fab01f6b99a0edbd);
+            
+        
+
+        polygon_323a05a63eec4a9af9ae508ebc60a179.bindPopup(popup_f97112856318a159a4b6a69905b8f593)
+        ;
+
+        
+    
+    
+            polygon_323a05a63eec4a9af9ae508ebc60a179.bindTooltip(
+                `<div>
+                     2 natureza(s) | T:1 A:2 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_47768b99e5fede483aa34f2c281ff3f0 = L.polygon(
+                [[-19.759818429916656, -47.89490490491951], [-19.758275258765877, -47.89384831969047], [-19.756630600668373, -47.89480926302751], [-19.756529126219267, -47.89682677568176], [-19.758072300655765, -47.89788335412277], [-19.75971694625567, -47.89692242669879]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_ca20a3bda9c14d0a3294640da6278d81 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_83b317819d72148c2adb3ddc05fe18ef = $(`<div id="html_83b317819d72148c2adb3ddc05fe18ef" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 0<br>         <b>Armas:</b> 2<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA DAS MAGNOLIAS (1)<br>&bull; RUA TURMALINAS (1)     </div></div>`)[0];
+                popup_ca20a3bda9c14d0a3294640da6278d81.setContent(html_83b317819d72148c2adb3ddc05fe18ef);
+            
+        
+
+        polygon_47768b99e5fede483aa34f2c281ff3f0.bindPopup(popup_ca20a3bda9c14d0a3294640da6278d81)
+        ;
+
+        
+    
+    
+            polygon_47768b99e5fede483aa34f2c281ff3f0.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:0 A:2 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_5cd6dd65e5d44a37bf57c55766b238b2 = L.polygon(
+                [[-19.75366495219357, -47.921996548254015], [-19.752121911655777, -47.920940009290646], [-19.750477101329892, -47.92190078455487], [-19.7503753440647, -47.923918082824414], [-19.751918387868766, -47.924974614948376], [-19.75356318567178, -47.92401385564343]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_d82f4ab0d4d8f7c7b5ea331a407dc349 = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_3ea970a480489f444b8cd59a3beb43fe = $(`<div id="html_3ea970a480489f444b8cd59a3beb43fe" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 0<br>         <b>Armas:</b> 1<br>         <b>Homicídios:</b> 0<br>         <b>Logradouros:</b><br>&bull; RUA JOAO ALFREDO (1)     </div></div>`)[0];
+                popup_d82f4ab0d4d8f7c7b5ea331a407dc349.setContent(html_3ea970a480489f444b8cd59a3beb43fe);
+            
+        
+
+        polygon_5cd6dd65e5d44a37bf57c55766b238b2.bindPopup(popup_d82f4ab0d4d8f7c7b5ea331a407dc349)
+        ;
+
+        
+    
+    
+            polygon_5cd6dd65e5d44a37bf57c55766b238b2.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:0 A:1 H:0
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_abb3f2d33a70ca12be1368735edb6d02 = L.polygon(
+                [[-19.75480069786674, -47.93112221682731], [-19.75325775428645, -47.930065688380864], [-19.751612937426376, -47.931026411641824], [-19.75151107667889, -47.93304364737545], [-19.753054023520843, -47.93410016896511], [-19.75469882784862, -47.93313946167916]],
+                {"bubblingMouseEvents": true, "color": "#555", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F2C94C", "fillOpacity": 0.5, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 0.8}
+            ).addTo(feature_group_fc7896dea4d2c091820217ce05a0b273);
+        
+    
+        var popup_78d7b5c14d7d5b853cdc384357fcd7eb = L.popup({
+  "maxWidth": 280,
+});
+
+        
+            
+                var html_910ae01a7eb03542c65dc4ed4f7be3d7 = $(`<div id="html_910ae01a7eb03542c65dc4ed4f7be3d7" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:210px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Célula &mdash; 1 natureza(s)</div>         <b>Tráfico:</b> 0<br>         <b>Armas:</b> 0<br>         <b>Homicídios:</b> 1<br>         <b>Logradouros:</b><br>&bull; AVENIDA FREI PAULINO (1)     </div></div>`)[0];
+                popup_78d7b5c14d7d5b853cdc384357fcd7eb.setContent(html_910ae01a7eb03542c65dc4ed4f7be3d7);
+            
+        
+
+        polygon_abb3f2d33a70ca12be1368735edb6d02.bindPopup(popup_78d7b5c14d7d5b853cdc384357fcd7eb)
+        ;
+
+        
+    
+    
+            polygon_abb3f2d33a70ca12be1368735edb6d02.bindTooltip(
+                `<div>
+                     1 natureza(s) | T:0 A:0 H:1
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_fc7896dea4d2c091820217ce05a0b273.addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+            var feature_group_2b5e27bf28c3110117376375b44712af = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_b192b6d359ea32922ba02fbf4d742847 = L.circleMarker(
+                [-19.7592289, -47.9061107],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_1923b089b68e46fea268df1d47c6b6a7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_657aaf1ee0dcdaab120abbf57a66e003 = $(`<div id="html_657aaf1ee0dcdaab120abbf57a66e003" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> AVENIDA ORLANDO RODRIGUES CUNHA<br>         <b>Ano:</b> 2025<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_1923b089b68e46fea268df1d47c6b6a7.setContent(html_657aaf1ee0dcdaab120abbf57a66e003);
+            
+        
+
+        circle_marker_b192b6d359ea32922ba02fbf4d742847.bindPopup(popup_1923b089b68e46fea268df1d47c6b6a7)
+        ;
+
+        
+    
+    
+            circle_marker_b192b6d359ea32922ba02fbf4d742847.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_63768bca4a488625efeced015bd11274 = L.circleMarker(
+                [-19.7605006, -47.8938544],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_d8b367f56c7a378b1721b3522321bf55 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b79288256dbd982af11e23cea49948e5 = $(`<div id="html_b79288256dbd982af11e23cea49948e5" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Lourdes<br>         <b>Logradouro:</b> RUA DAS GLICINIAS<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_d8b367f56c7a378b1721b3522321bf55.setContent(html_b79288256dbd982af11e23cea49948e5);
+            
+        
+
+        circle_marker_63768bca4a488625efeced015bd11274.bindPopup(popup_d8b367f56c7a378b1721b3522321bf55)
+        ;
+
+        
+    
+    
+            circle_marker_63768bca4a488625efeced015bd11274.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_af0ede1639db5c3bf5b6d873829d9af1 = L.circleMarker(
+                [-19.7561404, -47.9248653],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_a72eb8fa28bf646654967713e71fb2ed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_105f8ef281c4a2011aea0281e0caa366 = $(`<div id="html_105f8ef281c4a2011aea0281e0caa366" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA TENENTE WENCESLAU DE OLIVEIRA<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_a72eb8fa28bf646654967713e71fb2ed.setContent(html_105f8ef281c4a2011aea0281e0caa366);
+            
+        
+
+        circle_marker_af0ede1639db5c3bf5b6d873829d9af1.bindPopup(popup_a72eb8fa28bf646654967713e71fb2ed)
+        ;
+
+        
+    
+    
+            circle_marker_af0ede1639db5c3bf5b6d873829d9af1.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8eec75e68288fa8c0df10325edad301b = L.circleMarker(
+                [-19.7615882, -47.9118734],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_3b53c56f470fd01216addd6afb2bf285 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1fe4627e8489f5f5544c9c679426da62 = $(`<div id="html_1fe4627e8489f5f5544c9c679426da62" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA AGUSTINHO AMANCIO SOUZA<br>         <b>Ano:</b> 2026<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_3b53c56f470fd01216addd6afb2bf285.setContent(html_1fe4627e8489f5f5544c9c679426da62);
+            
+        
+
+        circle_marker_8eec75e68288fa8c0df10325edad301b.bindPopup(popup_3b53c56f470fd01216addd6afb2bf285)
+        ;
+
+        
+    
+    
+            circle_marker_8eec75e68288fa8c0df10325edad301b.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8fdb4f4536a7fb87c67aa103302ee92b = L.circleMarker(
+                [-19.7613392, -47.9143566],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_0e470c8b08541ab8c5d1e9166b9ee1fa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c6c1c1f1f93302010ebdfa31c2dfd609 = $(`<div id="html_c6c1c1f1f93302010ebdfa31c2dfd609" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> AVENIDA ORLANDO RODRIGUES CUNHA<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_0e470c8b08541ab8c5d1e9166b9ee1fa.setContent(html_c6c1c1f1f93302010ebdfa31c2dfd609);
+            
+        
+
+        circle_marker_8fdb4f4536a7fb87c67aa103302ee92b.bindPopup(popup_0e470c8b08541ab8c5d1e9166b9ee1fa)
+        ;
+
+        
+    
+    
+            circle_marker_8fdb4f4536a7fb87c67aa103302ee92b.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b4b4c23786a66893116eff149f495825 = L.circleMarker(
+                [-19.7623736, -47.9248454],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_d491786f60fbf0c146f2543f231e6bbd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1997535ac64b249a6542eff2a7b0c746 = $(`<div id="html_1997535ac64b249a6542eff2a7b0c746" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA SALDANHA MARINHO<br>         <b>Ano:</b> 2024<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_d491786f60fbf0c146f2543f231e6bbd.setContent(html_1997535ac64b249a6542eff2a7b0c746);
+            
+        
+
+        circle_marker_b4b4c23786a66893116eff149f495825.bindPopup(popup_d491786f60fbf0c146f2543f231e6bbd)
+        ;
+
+        
+    
+    
+            circle_marker_b4b4c23786a66893116eff149f495825.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3be7b36759718c91f814bde0b075733f = L.circleMarker(
+                [-19.7637758, -47.9082561],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_483469ab26c35528d60580cf542f7b4d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_711e8821e737537a66c3ac208278231f = $(`<div id="html_711e8821e737537a66c3ac208278231f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA BEATRIZ ALVES SILVA<br>         <b>Ano:</b> 2025<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_483469ab26c35528d60580cf542f7b4d.setContent(html_711e8821e737537a66c3ac208278231f);
+            
+        
+
+        circle_marker_3be7b36759718c91f814bde0b075733f.bindPopup(popup_483469ab26c35528d60580cf542f7b4d)
+        ;
+
+        
+    
+    
+            circle_marker_3be7b36759718c91f814bde0b075733f.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ebd41250dbcc84b7ea6cfb29fb83cd22 = L.circleMarker(
+                [-19.7618108, -47.9082604],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_185ab831093c5ac83752ec806144b20f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_715ab28e32a7a79e039912deab089e9d = $(`<div id="html_715ab28e32a7a79e039912deab089e9d" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA ANTONIO QUEIROZ COSTA<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_185ab831093c5ac83752ec806144b20f.setContent(html_715ab28e32a7a79e039912deab089e9d);
+            
+        
+
+        circle_marker_ebd41250dbcc84b7ea6cfb29fb83cd22.bindPopup(popup_185ab831093c5ac83752ec806144b20f)
+        ;
+
+        
+    
+    
+            circle_marker_ebd41250dbcc84b7ea6cfb29fb83cd22.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_babd05cb54040cb36fb2a7c92e836f0b = L.circleMarker(
+                [-19.7636394, -47.9099696],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_8897fd22447905189febbc87250a2754 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9fb0c2dfcd6eb7e33182e7f61c89d8c2 = $(`<div id="html_9fb0c2dfcd6eb7e33182e7f61c89d8c2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA ANTONIO BARBOSA<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_8897fd22447905189febbc87250a2754.setContent(html_9fb0c2dfcd6eb7e33182e7f61c89d8c2);
+            
+        
+
+        circle_marker_babd05cb54040cb36fb2a7c92e836f0b.bindPopup(popup_8897fd22447905189febbc87250a2754)
+        ;
+
+        
+    
+    
+            circle_marker_babd05cb54040cb36fb2a7c92e836f0b.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_240a11298322062bcd2bbaaaa7339ff3 = L.circleMarker(
+                [-19.7633959, -47.9048341],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_d0232f1fc12c083d55e643c08fecc117 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1ed47d5b3bef7b068b054c9ed911fc0c = $(`<div id="html_1ed47d5b3bef7b068b054c9ed911fc0c" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA DAS MARGARIDAS<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_d0232f1fc12c083d55e643c08fecc117.setContent(html_1ed47d5b3bef7b068b054c9ed911fc0c);
+            
+        
+
+        circle_marker_240a11298322062bcd2bbaaaa7339ff3.bindPopup(popup_d0232f1fc12c083d55e643c08fecc117)
+        ;
+
+        
+    
+    
+            circle_marker_240a11298322062bcd2bbaaaa7339ff3.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_dc1a89441fdec5e984df4a1eec813012 = L.circleMarker(
+                [-19.7685521, -47.9139978],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_81cca9a503bd8fb0f01f2300886b9b27 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_928daeb3437fb2e768520ad9fa52fa31 = $(`<div id="html_928daeb3437fb2e768520ad9fa52fa31" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles II<br>         <b>Logradouro:</b> PRACA LAGO AZUL<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_81cca9a503bd8fb0f01f2300886b9b27.setContent(html_928daeb3437fb2e768520ad9fa52fa31);
+            
+        
+
+        circle_marker_dc1a89441fdec5e984df4a1eec813012.bindPopup(popup_81cca9a503bd8fb0f01f2300886b9b27)
+        ;
+
+        
+    
+    
+            circle_marker_dc1a89441fdec5e984df4a1eec813012.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5fd7ee6a8f1c4a9f701c3286742ce08d = L.circleMarker(
+                [-19.7616272, -47.8934518],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_3d58acffde35bbae70d16aacb1cad3ee = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_aa6624ed710532dcc50c4d4b8628ee2f = $(`<div id="html_aa6624ed710532dcc50c4d4b8628ee2f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Lourdes<br>         <b>Logradouro:</b> RUA DOS CRAVOS<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_3d58acffde35bbae70d16aacb1cad3ee.setContent(html_aa6624ed710532dcc50c4d4b8628ee2f);
+            
+        
+
+        circle_marker_5fd7ee6a8f1c4a9f701c3286742ce08d.bindPopup(popup_3d58acffde35bbae70d16aacb1cad3ee)
+        ;
+
+        
+    
+    
+            circle_marker_5fd7ee6a8f1c4a9f701c3286742ce08d.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_edcb4fcf6944131ed13ef07de923f802 = L.circleMarker(
+                [-19.7543828, -47.9289035],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_b1c391528b77c31f6e100e00665959d6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cba773a9dc5d82260b36e41eccfe5c9a = $(`<div id="html_cba773a9dc5d82260b36e41eccfe5c9a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA CASTRO ALVES<br>         <b>Ano:</b> 2024<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_b1c391528b77c31f6e100e00665959d6.setContent(html_cba773a9dc5d82260b36e41eccfe5c9a);
+            
+        
+
+        circle_marker_edcb4fcf6944131ed13ef07de923f802.bindPopup(popup_b1c391528b77c31f6e100e00665959d6)
+        ;
+
+        
+    
+    
+            circle_marker_edcb4fcf6944131ed13ef07de923f802.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f74e9f2cfc8f7f249d2caec8c74fde81 = L.circleMarker(
+                [-19.758252, -47.9133615],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_c7b9ce50aa6a1aaabc777a38e800a054 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fe20bbe447130ad82ae02bd6973dfabd = $(`<div id="html_fe20bbe447130ad82ae02bd6973dfabd" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA BARAO PONTE ALTA<br>         <b>Ano:</b> 2025<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_c7b9ce50aa6a1aaabc777a38e800a054.setContent(html_fe20bbe447130ad82ae02bd6973dfabd);
+            
+        
+
+        circle_marker_f74e9f2cfc8f7f249d2caec8c74fde81.bindPopup(popup_c7b9ce50aa6a1aaabc777a38e800a054)
+        ;
+
+        
+    
+    
+            circle_marker_f74e9f2cfc8f7f249d2caec8c74fde81.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_654898572efe9f3858c610e398aff159 = L.circleMarker(
+                [-19.7634193, -47.9216239],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_b0ea42bb60d7f3b60cf59d6ca4b1e065 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5f19aaf94c970cc8171180d7bc51fc9b = $(`<div id="html_5f19aaf94c970cc8171180d7bc51fc9b" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA IGUATAMA<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_b0ea42bb60d7f3b60cf59d6ca4b1e065.setContent(html_5f19aaf94c970cc8171180d7bc51fc9b);
+            
+        
+
+        circle_marker_654898572efe9f3858c610e398aff159.bindPopup(popup_b0ea42bb60d7f3b60cf59d6ca4b1e065)
+        ;
+
+        
+    
+    
+            circle_marker_654898572efe9f3858c610e398aff159.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_23d9dc0c2ce0b6e5fdea218e68f97550 = L.circleMarker(
+                [-19.7623945, -47.918992],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_6f1986d50210a28d2b40e7ca341f342b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_60446cfef8ce6dd086e0d0d72f8f6246 = $(`<div id="html_60446cfef8ce6dd086e0d0d72f8f6246" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> AVENIDA PRUDENTE DE MORAIS<br>         <b>Ano:</b> 2024<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_6f1986d50210a28d2b40e7ca341f342b.setContent(html_60446cfef8ce6dd086e0d0d72f8f6246);
+            
+        
+
+        circle_marker_23d9dc0c2ce0b6e5fdea218e68f97550.bindPopup(popup_6f1986d50210a28d2b40e7ca341f342b)
+        ;
+
+        
+    
+    
+            circle_marker_23d9dc0c2ce0b6e5fdea218e68f97550.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_18792d9e78d380ffacfbbd7a31a781f7 = L.circleMarker(
+                [-19.7633153, -47.9230708],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_2ca6daaa11930c425cae577d9ecf3e2f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ccdc5f8fb8113d1c12dc3492e69a2835 = $(`<div id="html_ccdc5f8fb8113d1c12dc3492e69a2835" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA IGUATAMA<br>         <b>Ano:</b> 2025<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_2ca6daaa11930c425cae577d9ecf3e2f.setContent(html_ccdc5f8fb8113d1c12dc3492e69a2835);
+            
+        
+
+        circle_marker_18792d9e78d380ffacfbbd7a31a781f7.bindPopup(popup_2ca6daaa11930c425cae577d9ecf3e2f)
+        ;
+
+        
+    
+    
+            circle_marker_18792d9e78d380ffacfbbd7a31a781f7.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5d10749aedd362cf7acd4b77843bc6a6 = L.circleMarker(
+                [-19.7543486, -47.9297401],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_c20b306d5067a898b51c89bd6ced6e10 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d894e5b8497f89f4c31eb6e6cc7b988c = $(`<div id="html_d894e5b8497f89f4c31eb6e6cc7b988c" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> AVENIDA GETULIO GUARITA<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_c20b306d5067a898b51c89bd6ced6e10.setContent(html_d894e5b8497f89f4c31eb6e6cc7b988c);
+            
+        
+
+        circle_marker_5d10749aedd362cf7acd4b77843bc6a6.bindPopup(popup_c20b306d5067a898b51c89bd6ced6e10)
+        ;
+
+        
+    
+    
+            circle_marker_5d10749aedd362cf7acd4b77843bc6a6.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2bbc1f64a9364a1b3c2487e0f539c69f = L.circleMarker(
+                [-19.7556422, -47.9338545],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_5b08f84ef43945c54b057753519dabe4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b26847093708437096c84ec15414ca6f = $(`<div id="html_b26847093708437096c84ec15414ca6f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> AVENIDA GUILHERME FERREIRA<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 0 de 3 naturezas     </div></div>`)[0];
+                popup_5b08f84ef43945c54b057753519dabe4.setContent(html_b26847093708437096c84ec15414ca6f);
+            
+        
+
+        circle_marker_2bbc1f64a9364a1b3c2487e0f539c69f.bindPopup(popup_5b08f84ef43945c54b057753519dabe4)
+        ;
+
+        
+    
+    
+            circle_marker_2bbc1f64a9364a1b3c2487e0f539c69f.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 0 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d20d72a7dea33a244e92b24deed11175 = L.circleMarker(
+                [-19.7590052, -47.9253612],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_f1208b2720e4f597de11020d1841fe9b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9c39e0760b99a58d42469d8aaa01753a = $(`<div id="html_9c39e0760b99a58d42469d8aaa01753a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA TENENTE WENCESLAU DE OLIVEIRA<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_f1208b2720e4f597de11020d1841fe9b.setContent(html_9c39e0760b99a58d42469d8aaa01753a);
+            
+        
+
+        circle_marker_d20d72a7dea33a244e92b24deed11175.bindPopup(popup_f1208b2720e4f597de11020d1841fe9b)
+        ;
+
+        
+    
+    
+            circle_marker_d20d72a7dea33a244e92b24deed11175.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_80ec012078d3662e9c34cdf83c65b9ae = L.circleMarker(
+                [-19.7698142, -47.9143784],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_d50bef2d4a07825546959d01b97313c8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3031bb7631c798ff6f63074a728092c7 = $(`<div id="html_3031bb7631c798ff6f63074a728092c7" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles II<br>         <b>Logradouro:</b> AVENIDA AMINTHAS MARTINS SANTOS<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_d50bef2d4a07825546959d01b97313c8.setContent(html_3031bb7631c798ff6f63074a728092c7);
+            
+        
+
+        circle_marker_80ec012078d3662e9c34cdf83c65b9ae.bindPopup(popup_d50bef2d4a07825546959d01b97313c8)
+        ;
+
+        
+    
+    
+            circle_marker_80ec012078d3662e9c34cdf83c65b9ae.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_174e00d1a066d3deefe08942e071afa8 = L.circleMarker(
+                [-19.7638647, -47.9252086],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_c30ff5f20664d320b090ac72ad36e006 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_38baa9489b410de3106bd3344bae319b = $(`<div id="html_38baa9489b410de3106bd3344bae319b" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA VISCONDE ABAETE<br>         <b>Ano:</b> 2026<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_c30ff5f20664d320b090ac72ad36e006.setContent(html_38baa9489b410de3106bd3344bae319b);
+            
+        
+
+        circle_marker_174e00d1a066d3deefe08942e071afa8.bindPopup(popup_c30ff5f20664d320b090ac72ad36e006)
+        ;
+
+        
+    
+    
+            circle_marker_174e00d1a066d3deefe08942e071afa8.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c816588ed30f015553e19f3e23e91e5c = L.circleMarker(
+                [-19.7608437, -47.905805],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_5c76f2a6e78c3adbeb327da8b1e3a735 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_00f2e72151d7e1f4905259ed3016c78a = $(`<div id="html_00f2e72151d7e1f4905259ed3016c78a" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA DAS ANGELICAS<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_5c76f2a6e78c3adbeb327da8b1e3a735.setContent(html_00f2e72151d7e1f4905259ed3016c78a);
+            
+        
+
+        circle_marker_c816588ed30f015553e19f3e23e91e5c.bindPopup(popup_5c76f2a6e78c3adbeb327da8b1e3a735)
+        ;
+
+        
+    
+    
+            circle_marker_c816588ed30f015553e19f3e23e91e5c.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_f473465e787d8f66f22d69b931181b0f = L.circleMarker(
+                [-19.7596342, -47.9082032],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_3509cde3b15b9c1bc2171140fdc4d3d5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4e54543c10378e07d3641b2ee8fc9bfb = $(`<div id="html_4e54543c10378e07d3641b2ee8fc9bfb" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> AVENIDA PADRE EDDIE BERNARDES SILVA<br>         <b>Ano:</b> 2025<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_3509cde3b15b9c1bc2171140fdc4d3d5.setContent(html_4e54543c10378e07d3641b2ee8fc9bfb);
+            
+        
+
+        circle_marker_f473465e787d8f66f22d69b931181b0f.bindPopup(popup_3509cde3b15b9c1bc2171140fdc4d3d5)
+        ;
+
+        
+    
+    
+            circle_marker_f473465e787d8f66f22d69b931181b0f.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cac47ce4954f2eda683a797e55212218 = L.circleMarker(
+                [-19.7634583, -47.9049341],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_8875aee0f02f426f761e57b965514f6f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9eef9fe7e93a7ead85f8a1bdda0512dc = $(`<div id="html_9eef9fe7e93a7ead85f8a1bdda0512dc" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA DAS MARGARIDAS<br>         <b>Ano:</b> 2020<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_8875aee0f02f426f761e57b965514f6f.setContent(html_9eef9fe7e93a7ead85f8a1bdda0512dc);
+            
+        
+
+        circle_marker_cac47ce4954f2eda683a797e55212218.bindPopup(popup_8875aee0f02f426f761e57b965514f6f)
+        ;
+
+        
+    
+    
+            circle_marker_cac47ce4954f2eda683a797e55212218.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_95e6e1c5d77228500d2979255db04cf1 = L.circleMarker(
+                [-19.7612929, -47.9082221],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_24bd89fb0abd14acd9686ba6fee9e566 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b3353678c9510775e1f626f762d7fb60 = $(`<div id="html_b3353678c9510775e1f626f762d7fb60" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA ANTONIO QUEIROZ COSTA<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_24bd89fb0abd14acd9686ba6fee9e566.setContent(html_b3353678c9510775e1f626f762d7fb60);
+            
+        
+
+        circle_marker_95e6e1c5d77228500d2979255db04cf1.bindPopup(popup_24bd89fb0abd14acd9686ba6fee9e566)
+        ;
+
+        
+    
+    
+            circle_marker_95e6e1c5d77228500d2979255db04cf1.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c4fa51adbf412f817bb185f365937e43 = L.circleMarker(
+                [-19.7637213, -47.9176963],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_2b5e27bf28c3110117376375b44712af);
+        
+    
+        var popup_39748e9cd6bb9579e3e04756e51e20b5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4d90a70cfb6b809dc4bb525b02782f21 = $(`<div id="html_4d90a70cfb6b809dc4bb525b02782f21" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#1F4E79;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Instrumental/intimidatória</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> AVENIDA ORLANDO RODRIGUES CUNHA<br>         <b>Ano:</b> 2020<br>         <b>Convergência criminal na célula:</b> 0 de 3 naturezas     </div></div>`)[0];
+                popup_39748e9cd6bb9579e3e04756e51e20b5.setContent(html_4d90a70cfb6b809dc4bb525b02782f21);
+            
+        
+
+        circle_marker_c4fa51adbf412f817bb185f365937e43.bindPopup(popup_39748e9cd6bb9579e3e04756e51e20b5)
+        ;
+
+        
+    
+    
+            circle_marker_c4fa51adbf412f817bb185f365937e43.bindTooltip(
+                `<div>
+                     PCC (Instrumental/intimidatória) — célula com 0 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_2b5e27bf28c3110117376375b44712af.addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+            var feature_group_25a0b3a6519cba18c2da1a77c8d69323 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_b1bf449a44c2d0f7fbc70e0a2006ddbe = L.circleMarker(
+                [-19.7625192, -47.9050259],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_d388b5d8afa7468babfcef0e8d0b48e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e59ba177fa5801da708f30b2ce0fa5d9 = $(`<div id="html_e59ba177fa5801da708f30b2ce0fa5d9" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA DAS MARGARIDAS<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_d388b5d8afa7468babfcef0e8d0b48e9.setContent(html_e59ba177fa5801da708f30b2ce0fa5d9);
+            
+        
+
+        circle_marker_b1bf449a44c2d0f7fbc70e0a2006ddbe.bindPopup(popup_d388b5d8afa7468babfcef0e8d0b48e9)
+        ;
+
+        
+    
+    
+            circle_marker_b1bf449a44c2d0f7fbc70e0a2006ddbe.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_513dc2bd3a9ff7a266100851a4329686 = L.circleMarker(
+                [-19.7637192, -47.91098],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_f28e6b1239ac349b587ebb3f16662f44 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_700a51a6f0858855ca2ae7598231b726 = $(`<div id="html_700a51a6f0858855ca2ae7598231b726" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA ANGELINO BARBERATO<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_f28e6b1239ac349b587ebb3f16662f44.setContent(html_700a51a6f0858855ca2ae7598231b726);
+            
+        
+
+        circle_marker_513dc2bd3a9ff7a266100851a4329686.bindPopup(popup_f28e6b1239ac349b587ebb3f16662f44)
+        ;
+
+        
+    
+    
+            circle_marker_513dc2bd3a9ff7a266100851a4329686.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8bab693e531df86f479c6e3bc4c96ad8 = L.circleMarker(
+                [-19.7604576, -47.9044245],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_f443768bc55a84c14f789aa90db1336f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6c6cde42676b8a22a796124dc5badab2 = $(`<div id="html_6c6cde42676b8a22a796124dc5badab2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA JASMINS<br>         <b>Ano:</b> 2023<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_f443768bc55a84c14f789aa90db1336f.setContent(html_6c6cde42676b8a22a796124dc5badab2);
+            
+        
+
+        circle_marker_8bab693e531df86f479c6e3bc4c96ad8.bindPopup(popup_f443768bc55a84c14f789aa90db1336f)
+        ;
+
+        
+    
+    
+            circle_marker_8bab693e531df86f479c6e3bc4c96ad8.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_206e1125f1bdaa6de81c4863e39ebf9a = L.circleMarker(
+                [-19.7591091, -47.9092804],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_760fe5fb7ba415b6179fb6035596ac41 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f19ae79905788d64e0542687eebf41a7 = $(`<div id="html_f19ae79905788d64e0542687eebf41a7" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> RUA JOSE MATEUS SOBRINHO<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_760fe5fb7ba415b6179fb6035596ac41.setContent(html_f19ae79905788d64e0542687eebf41a7);
+            
+        
+
+        circle_marker_206e1125f1bdaa6de81c4863e39ebf9a.bindPopup(popup_760fe5fb7ba415b6179fb6035596ac41)
+        ;
+
+        
+    
+    
+            circle_marker_206e1125f1bdaa6de81c4863e39ebf9a.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2be65591f314215fc0945bccee38f0e4 = L.circleMarker(
+                [-19.760103, -47.9231794],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_584d7e92c524b4e086df15dd2189b9cb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2af4c75da7c98a098094139d482c2c2d = $(`<div id="html_2af4c75da7c98a098094139d482c2c2d" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> AVENIDA PRUDENTE DE MORAIS<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_584d7e92c524b4e086df15dd2189b9cb.setContent(html_2af4c75da7c98a098094139d482c2c2d);
+            
+        
+
+        circle_marker_2be65591f314215fc0945bccee38f0e4.bindPopup(popup_584d7e92c524b4e086df15dd2189b9cb)
+        ;
+
+        
+    
+    
+            circle_marker_2be65591f314215fc0945bccee38f0e4.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_c1d4c3f4f7bd27d599f70c18777c569b = L.circleMarker(
+                [-19.7600093, -47.9132768],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_f45c7763f885660d44f66265648df0c2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2d745d3d6732cd949838343bb8f697e1 = $(`<div id="html_2d745d3d6732cd949838343bb8f697e1" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA GUIA LOPES<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_f45c7763f885660d44f66265648df0c2.setContent(html_2d745d3d6732cd949838343bb8f697e1);
+            
+        
+
+        circle_marker_c1d4c3f4f7bd27d599f70c18777c569b.bindPopup(popup_f45c7763f885660d44f66265648df0c2)
+        ;
+
+        
+    
+    
+            circle_marker_c1d4c3f4f7bd27d599f70c18777c569b.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_557bee0cf1fe700ba9220ce909c60eed = L.circleMarker(
+                [-19.7593507, -47.9071781],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_a292bb9e382faefe1a83afaa32e09dc5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4a304ef36905dc48ecd81f051917dce1 = $(`<div id="html_4a304ef36905dc48ecd81f051917dce1" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> AVENIDA ORLANDO RODRIGUES CUNHA<br>         <b>Ano:</b> 2025<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_a292bb9e382faefe1a83afaa32e09dc5.setContent(html_4a304ef36905dc48ecd81f051917dce1);
+            
+        
+
+        circle_marker_557bee0cf1fe700ba9220ce909c60eed.bindPopup(popup_a292bb9e382faefe1a83afaa32e09dc5)
+        ;
+
+        
+    
+    
+            circle_marker_557bee0cf1fe700ba9220ce909c60eed.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0b9492c7b2226536f51bbda73308fc84 = L.circleMarker(
+                [-19.761889, -47.8934871],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_8cd90fa4150bdd1c658fc50a03e28566 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7df338589266227d005783371f0b4f58 = $(`<div id="html_7df338589266227d005783371f0b4f58" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Lourdes<br>         <b>Logradouro:</b> RUA DOS CRAVOS<br>         <b>Ano:</b> 2020<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_8cd90fa4150bdd1c658fc50a03e28566.setContent(html_7df338589266227d005783371f0b4f58);
+            
+        
+
+        circle_marker_0b9492c7b2226536f51bbda73308fc84.bindPopup(popup_8cd90fa4150bdd1c658fc50a03e28566)
+        ;
+
+        
+    
+    
+            circle_marker_0b9492c7b2226536f51bbda73308fc84.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b0225296043ab9840bd5cbafa45bcc61 = L.circleMarker(
+                [-19.7593488, -47.9070855],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_ec023f6dab7c52aa9b006f89bdeff15a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dd4c61b1ae2bbc225592ca4ae92f2817 = $(`<div id="html_dd4c61b1ae2bbc225592ca4ae92f2817" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles I<br>         <b>Logradouro:</b> AVENIDA ORLANDO RODRIGUES CUNHA<br>         <b>Ano:</b> 2021<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_ec023f6dab7c52aa9b006f89bdeff15a.setContent(html_dd4c61b1ae2bbc225592ca4ae92f2817);
+            
+        
+
+        circle_marker_b0225296043ab9840bd5cbafa45bcc61.bindPopup(popup_ec023f6dab7c52aa9b006f89bdeff15a)
+        ;
+
+        
+    
+    
+            circle_marker_b0225296043ab9840bd5cbafa45bcc61.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_389fc49286c29c71912632db1e60da0f = L.circleMarker(
+                [-19.7628879, -47.9220908],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_57f1846c4359c98a2d9a3fdaf2747a37 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d343676e8094e3dac20161c0b3152bd2 = $(`<div id="html_d343676e8094e3dac20161c0b3152bd2" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA CARATINGA<br>         <b>Ano:</b> 2020<br>         <b>Convergência criminal na célula:</b> 3 de 3 naturezas     </div></div>`)[0];
+                popup_57f1846c4359c98a2d9a3fdaf2747a37.setContent(html_d343676e8094e3dac20161c0b3152bd2);
+            
+        
+
+        circle_marker_389fc49286c29c71912632db1e60da0f.bindPopup(popup_57f1846c4359c98a2d9a3fdaf2747a37)
+        ;
+
+        
+    
+    
+            circle_marker_389fc49286c29c71912632db1e60da0f.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 3 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5a5a0677df4fdb28a2276a507d607db0 = L.circleMarker(
+                [-19.7626927, -47.9257596],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_9eb1de54d9ae3e9b2bf7b129f73ce238 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1a7b6fda946c36e0ef45d1e5ce7d1841 = $(`<div id="html_1a7b6fda946c36e0ef45d1e5ce7d1841" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Abadia<br>         <b>Logradouro:</b> RUA IGUATAMA<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_9eb1de54d9ae3e9b2bf7b129f73ce238.setContent(html_1a7b6fda946c36e0ef45d1e5ce7d1841);
+            
+        
+
+        circle_marker_5a5a0677df4fdb28a2276a507d607db0.bindPopup(popup_9eb1de54d9ae3e9b2bf7b129f73ce238)
+        ;
+
+        
+    
+    
+            circle_marker_5a5a0677df4fdb28a2276a507d607db0.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_02a43d30ee44e0f3877dc0a8399d0ca9 = L.circleMarker(
+                [-19.7704672, -47.917242],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#000000", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 7, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_25a0b3a6519cba18c2da1a77c8d69323);
+        
+    
+        var popup_cc5d03d37e96d407332567ecc887c136 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1876c236feace4606359c6816cc26f1f = $(`<div id="html_1876c236feace4606359c6816cc26f1f" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#000000;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Elemento de inteligência</div>         <b>Bairro:</b> Costa Teles II<br>         <b>Logradouro:</b> RUA ANTONIO ADAUTO AZEVEDO<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 2 de 3 naturezas     </div></div>`)[0];
+                popup_cc5d03d37e96d407332567ecc887c136.setContent(html_1876c236feace4606359c6816cc26f1f);
+            
+        
+
+        circle_marker_02a43d30ee44e0f3877dc0a8399d0ca9.bindPopup(popup_cc5d03d37e96d407332567ecc887c136)
+        ;
+
+        
+    
+    
+            circle_marker_02a43d30ee44e0f3877dc0a8399d0ca9.bindTooltip(
+                `<div>
+                     PCC (Elemento de inteligência) — célula com 2 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_25a0b3a6519cba18c2da1a77c8d69323.addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+            var feature_group_faf638968f878acf6fe4b37009767aa2 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_503b284298a57e3944110750d219b529 = L.circleMarker(
+                [-19.7624696, -47.8920526],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#999999", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_faf638968f878acf6fe4b37009767aa2);
+        
+    
+        var popup_e7ed2cc870deb9444393695e65c234fb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0967852bd094b0646120796245bbce90 = $(`<div id="html_0967852bd094b0646120796245bbce90" style="width: 100.0%; height: 100.0%;">     <div style='font-family:Arial;font-size:12px;min-width:230px;'>         <div style='background:#999999;color:#fff;padding:4px 8px;              margin:-10px -10px 8px -10px;font-weight:bold;'>             Menção ao PCC &mdash; Ruído</div>         <b>Bairro:</b> Lourdes<br>         <b>Logradouro:</b> RUA DAS OLIVEIRAS<br>         <b>Ano:</b> 2022<br>         <b>Convergência criminal na célula:</b> 1 de 3 naturezas     </div></div>`)[0];
+                popup_e7ed2cc870deb9444393695e65c234fb.setContent(html_0967852bd094b0646120796245bbce90);
+            
+        
+
+        circle_marker_503b284298a57e3944110750d219b529.bindPopup(popup_e7ed2cc870deb9444393695e65c234fb)
+        ;
+
+        
+    
+    
+            circle_marker_503b284298a57e3944110750d219b529.bindTooltip(
+                `<div>
+                     PCC (Ruído) — célula com 1 natureza(s)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var tile_layer_60ea9a10664c611a9dfdd95b924ae967 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap, \u00a9 CARTO",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_60ea9a10664c611a9dfdd95b924ae967.addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+            var tile_layer_ea40c1351d646d5b7a99b0ee22e425ba = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/rastertiles/voyager_only_labels/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap, \u00a9 CARTO",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+  "pane": "ruasLabels",
+}
+
+            );
+        
+    
+            tile_layer_ea40c1351d646d5b7a99b0ee22e425ba.addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_a31c1afa0437d16eea64eeaf058998de);
+        
+    
+            var tile_layer_ea36bb4866f750ea6008be5ae423a56d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_c3b2dffc85795b3549de932f6da1b10e = new L.Control.MiniMap(
+                tile_layer_ea36bb4866f750ea6008be5ae423a56d,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_a31c1afa0437d16eea64eeaf058998de.addControl(mini_map_c3b2dffc85795b3549de932f6da1b10e);
+        
+    
+            var measure_control_dd68939b4dec013b01d1cc60bc845706 = new L.Control.Measure(
+                {
+  "position": "topleft",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_a31c1afa0437d16eea64eeaf058998de.addControl(measure_control_dd68939b4dec013b01d1cc60bc845706);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var layer_control_4465c65766b2e03e34803c4740ae0321_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_761968c96d585d58ae9fdfafb030eaec,
+                    "Mapa claro (CartoDB)" : tile_layer_60ea9a10664c611a9dfdd95b924ae967,
+                },
+                overlays :  {
+                    "Converg\u00eancia das 3 naturezas (hex\u00e1gonos)" : feature_group_fc7896dea4d2c091820217ce05a0b273,
+                    "Men\u00e7\u00e3o PCC \u2014 instrumental/intimidat\u00f3ria" : feature_group_2b5e27bf28c3110117376375b44712af,
+                    "Men\u00e7\u00e3o PCC \u2014 elemento de intelig\u00eancia" : feature_group_25a0b3a6519cba18c2da1a77c8d69323,
+                    "Men\u00e7\u00e3o PCC \u2014 ru\u00eddo" : feature_group_faf638968f878acf6fe4b37009767aa2,
+                    "Ruas e r\u00f3tulos (sobreposi\u00e7\u00e3o)" : tile_layer_ea40c1351d646d5b7a99b0ee22e425ba,
+                },
+            };
+            let layer_control_4465c65766b2e03e34803c4740ae0321 = L.control.layers(
+                layer_control_4465c65766b2e03e34803c4740ae0321_layers.base_layers,
+                layer_control_4465c65766b2e03e34803c4740ae0321_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_a31c1afa0437d16eea64eeaf058998de);
+
+        
+</script>
+</html>

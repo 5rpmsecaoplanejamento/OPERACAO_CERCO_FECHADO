@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_c704ea9664ddd80c70f6fed6931d5957 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+        min-height: 46px; display: flex; align-items: center;
+        justify-content: space-between; padding: 8px 14px;
+        background: rgba(255,255,255,0.96);
+        border-bottom: 2px solid #1F4E79;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.10);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px; color: #1f2937;">
+        <strong style="font-size: 14px; color: #1F4E79;">Mapa de Concentração Espacial — Apreensão de Armas de Fogo</strong>
+        <span style="color: #595959; font-size: 12px;">5ª RPM — P/3 — Uberaba/MG</span>
+    </div>
+    <style>
+    .leaflet-container { margin-top: 46px !important; }
+    </style>
+    
+    
+    <div style="position: fixed; bottom: 30px; left: 12px; z-index: 999;
+        background: rgba(255,255,255,0.96); border: 1.5px solid #1F4E79;
+        border-radius: 4px; padding: 10px 14px;
+        font-family: Arial; font-size: 12px; color: #1f2937;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.18); min-width: 220px;">
+        <div style="font-weight: bold; color: #1F4E79; margin-bottom: 6px;
+             border-bottom: 1px solid #ccc; padding-bottom: 4px;">
+            Apreensão de armas — 46 registros<br>
+            <span style='font-weight: normal; font-size: 10.5px; color: #595959;'>
+            jan/2020 a abr/2026
+            </span>
+        </div>
+        <div style='margin: 3px 0;'><span style='display: inline-block; width: 14px; height: 14px; background: #8B1A1A; border: 1px solid #333; vertical-align: middle; margin-right: 6px;'></span><b>Abadia</b> — 18 ocorrências</div>
+<div style='margin: 3px 0;'><span style='display: inline-block; width: 14px; height: 14px; background: #1F4E79; border: 1px solid #333; vertical-align: middle; margin-right: 6px;'></span><b>Costa Teles I</b> — 1 ocorrências</div>
+<div style='margin: 3px 0;'><span style='display: inline-block; width: 14px; height: 14px; background: #7B5DAA; border: 1px solid #333; vertical-align: middle; margin-right: 6px;'></span><b>Costa Teles II</b> — 9 ocorrências</div>
+<div style='margin: 3px 0;'><span style='display: inline-block; width: 14px; height: 14px; background: #2E6F47; border: 1px solid #333; vertical-align: middle; margin-right: 6px;'></span><b>Lourdes</b> — 18 ocorrências</div>
+        <div style='margin-top: 8px; font-size: 10.5px;
+             color: #595959; line-height: 1.35;'>
+            Camadas: alterne no canto superior direito.<br>
+            Tela cheia: canto superior esquerdo.
+        </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_c704ea9664ddd80c70f6fed6931d5957" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_c704ea9664ddd80c70f6fed6931d5957 = L.map(
+                "map_c704ea9664ddd80c70f6fed6931d5957",
+                {
+                    center: [-19.762497981086955, -47.91170185434782],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 15,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+
+            
+
+        
+    
+            var tile_layer_1ccb920ef1ca2efc6692dc4c6b067c2d = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1ccb920ef1ca2efc6692dc4c6b067c2d.addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+        
+    
+            var heat_map_cba562be153923ef18d6d7feeec6f4fc = L.heatLayer(
+                [[-19.7646633, -47.8911153], [-19.7645982, -47.891107], [-19.7644394, -47.9263409], [-19.7603582, -47.9280157], [-19.7626145, -47.9236821], [-19.7648739, -47.9032026], [-19.7615109, -47.9051917], [-19.7566455, -47.9305497], [-19.7567999, -47.9186896], [-19.7626295, -47.901044], [-19.7671664, -47.8988787], [-19.7631623, -47.9228769], [-19.7586813, -47.8971882], [-19.7544663, -47.927822], [-19.7666942, -47.9216088], [-19.7634821, -47.9027116], [-19.7568232, -47.9281371], [-19.7549912, -47.9231289], [-19.7544726, -47.9280089], [-19.7695132, -47.9136439], [-19.7630253, -47.9028254], [-19.7579783, -47.9085636], [-19.7600016, -47.8992942], [-19.7601834, -47.9037918], [-19.7595672, -47.8966678], [-19.7707777, -47.9169098], [-19.7625092, -47.9141388], [-19.7697948, -47.9142932], [-19.7575703, -47.9282123], [-19.7648927, -47.9001064], [-19.758228, -47.9015238], [-19.7695132, -47.9136439], [-19.7521757, -47.9221717], [-19.7657122, -47.8992736], [-19.7703377, -47.9142083], [-19.7603549, -47.9007346], [-19.7649033, -47.8980503], [-19.75833333, -47.9265], [-19.7658621, -47.8980567], [-19.7686584, -47.9171993], [-19.7631623, -47.9228769], [-19.7613229, -47.8927424], [-19.7695648, -47.9159743], [-19.7579783, -47.9085636], [-19.7697948, -47.9142932], [-19.7641186, -47.9247258]],
+                {
+  "minOpacity": 0.35,
+  "maxZoom": 18,
+  "radius": 22,
+  "blur": 18,
+  "gradient": {
+  0.0: "#ffffcc",
+  0.3: "#fed976",
+  0.5: "#fd8d3c",
+  0.7: "#e31a1c",
+  1.0: "#800026",
+},
+}
+            );
+        
+    
+            heat_map_cba562be153923ef18d6d7feeec6f4fc.addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+        
+    
+            var feature_group_447f782aa525728a5c55a16266b36521 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_0c2fcbc13b21a3d6807413489242bc5e = L.circleMarker(
+                [-19.7644394, -47.9263409],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_442d42447ac607899db10a836b532c83 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1014682264925649914ed75e1e210191 = $(`<div id="html_1014682264925649914ed75e1e210191" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> AVENIDA NELSON FREIRE<br>             <b>Data do fato:</b> 25/10/2025<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> VIAS DE FATO / AGRESSAO<br>             <b>REDS:</b> 2025-049594378-001         </div>         </div>`)[0];
+                popup_442d42447ac607899db10a836b532c83.setContent(html_1014682264925649914ed75e1e210191);
+            
+        
+
+        circle_marker_0c2fcbc13b21a3d6807413489242bc5e.bindPopup(popup_442d42447ac607899db10a836b532c83)
+        ;
+
+        
+    
+    
+            var circle_marker_cbaa2c148396fb0e348e3f3a0b87d499 = L.circleMarker(
+                [-19.7603582, -47.9280157],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_7c1bae96b0107695a61f1092c82a7980 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_43c40bd7fe0d2bf3f769f40ce96684a1 = $(`<div id="html_43c40bd7fe0d2bf3f769f40ce96684a1" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA CONEGO CEZAR BORGES<br>             <b>Data do fato:</b> 13/12/2025<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2025-057454802-001         </div>         </div>`)[0];
+                popup_7c1bae96b0107695a61f1092c82a7980.setContent(html_43c40bd7fe0d2bf3f769f40ce96684a1);
+            
+        
+
+        circle_marker_cbaa2c148396fb0e348e3f3a0b87d499.bindPopup(popup_7c1bae96b0107695a61f1092c82a7980)
+        ;
+
+        
+    
+    
+            var circle_marker_f06950f4a8416a41d389f8f0584c2252 = L.circleMarker(
+                [-19.7626145, -47.9236821],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_32925d07fe8518de29dd191ae6201fc2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c290f6fb241bd20dcdfbb0006fcaac0c = $(`<div id="html_c290f6fb241bd20dcdfbb0006fcaac0c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA MONSENHOR INACIO<br>             <b>Data do fato:</b> 22/03/2026<br>             <b>Dia:</b> DOMINGO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2026-013280076-001         </div>         </div>`)[0];
+                popup_32925d07fe8518de29dd191ae6201fc2.setContent(html_c290f6fb241bd20dcdfbb0006fcaac0c);
+            
+        
+
+        circle_marker_f06950f4a8416a41d389f8f0584c2252.bindPopup(popup_32925d07fe8518de29dd191ae6201fc2)
+        ;
+
+        
+    
+    
+            var circle_marker_5fbfb3a016a8704e1de56c37e17eb713 = L.circleMarker(
+                [-19.7566455, -47.9305497],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_3dc62edbb725ed1882c0482c791d1d8a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c3c7796ddb474d34f4e03305657f342f = $(`<div id="html_c3c7796ddb474d34f4e03305657f342f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA DA CONSTITUICAO<br>             <b>Data do fato:</b> 04/02/2025<br>             <b>Dia:</b> TERCA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> CUMPRIMENTO DE BUSCA E APREENSAO DE OBJETOS, PES ..<br>             <b>REDS:</b> 2025-005404524-001         </div>         </div>`)[0];
+                popup_3dc62edbb725ed1882c0482c791d1d8a.setContent(html_c3c7796ddb474d34f4e03305657f342f);
+            
+        
+
+        circle_marker_5fbfb3a016a8704e1de56c37e17eb713.bindPopup(popup_3dc62edbb725ed1882c0482c791d1d8a)
+        ;
+
+        
+    
+    
+            var circle_marker_d142ff4414e67b8764ea009c3232addb = L.circleMarker(
+                [-19.7567999, -47.9186896],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_fb9582b2d7215da9d829786bea46235d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5b31ebc479bed4317cb1610630d53395 = $(`<div id="html_5b31ebc479bed4317cb1610630d53395" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA JOAO PESSOA<br>             <b>Data do fato:</b> 07/03/2025<br>             <b>Dia:</b> SEXTA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2025-010733408-001         </div>         </div>`)[0];
+                popup_fb9582b2d7215da9d829786bea46235d.setContent(html_5b31ebc479bed4317cb1610630d53395);
+            
+        
+
+        circle_marker_d142ff4414e67b8764ea009c3232addb.bindPopup(popup_fb9582b2d7215da9d829786bea46235d)
+        ;
+
+        
+    
+    
+            var circle_marker_b08be9735cad3000e6ce8a3fea30b19f = L.circleMarker(
+                [-19.7631623, -47.9228769],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_0a6beb878b37384a5ee7f0cf4786160f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cdf4b8817b57101ac9ae67ebc0ecfafb = $(`<div id="html_cdf4b8817b57101ac9ae67ebc0ecfafb" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA IGUATAMA<br>             <b>Data do fato:</b> 10/12/2023<br>             <b>Dia:</b> DOMINGO<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> BAR / LANCHONETE / RESTAURANTE / SIMILAR<br>             <b>Natureza principal:</b> POSSE/PORTE ILEGAL ARMA FOGO/MUNIC/ACESSO USO PROIB/RESTRITO<br>             <b>REDS:</b> 2023-057337081-001         </div>         </div>`)[0];
+                popup_0a6beb878b37384a5ee7f0cf4786160f.setContent(html_cdf4b8817b57101ac9ae67ebc0ecfafb);
+            
+        
+
+        circle_marker_b08be9735cad3000e6ce8a3fea30b19f.bindPopup(popup_0a6beb878b37384a5ee7f0cf4786160f)
+        ;
+
+        
+    
+    
+            var circle_marker_a43be9e2dd39854c2edf2a431f2472a9 = L.circleMarker(
+                [-19.7544663, -47.927822],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_270df86d8fc2c28562c04f451a934857 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eeceba25f335f8b35d2f3f5c3f7e629f = $(`<div id="html_eeceba25f335f8b35d2f3f5c3f7e629f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA CASTRO ALVES<br>             <b>Data do fato:</b> 18/06/2021<br>             <b>Dia:</b> SEXTA-FEIRA<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2021-029367391-001         </div>         </div>`)[0];
+                popup_270df86d8fc2c28562c04f451a934857.setContent(html_eeceba25f335f8b35d2f3f5c3f7e629f);
+            
+        
+
+        circle_marker_a43be9e2dd39854c2edf2a431f2472a9.bindPopup(popup_270df86d8fc2c28562c04f451a934857)
+        ;
+
+        
+    
+    
+            var circle_marker_1e8273aa99c61da6ede7db404b48322a = L.circleMarker(
+                [-19.7666942, -47.9216088],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_71f84fd646d34f4fb8deb8f6ab7d63cc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_af94ac027fc5613139ed04146cd6a522 = $(`<div id="html_af94ac027fc5613139ed04146cd6a522" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA SAO MATEUS<br>             <b>Data do fato:</b> 03/08/2020<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2020-037258673-001         </div>         </div>`)[0];
+                popup_71f84fd646d34f4fb8deb8f6ab7d63cc.setContent(html_af94ac027fc5613139ed04146cd6a522);
+            
+        
+
+        circle_marker_1e8273aa99c61da6ede7db404b48322a.bindPopup(popup_71f84fd646d34f4fb8deb8f6ab7d63cc)
+        ;
+
+        
+    
+    
+            var circle_marker_40882d2474fcce98f5b531461fce6438 = L.circleMarker(
+                [-19.7568232, -47.9281371],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_422dda146a71f7131d4cd27a8c5372ed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ed55352175a70501704cc28656a6db31 = $(`<div id="html_ed55352175a70501704cc28656a6db31" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA CONDE PRADOS<br>             <b>Data do fato:</b> 03/08/2020<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> FURTO<br>             <b>REDS:</b> 2020-037160087-001         </div>         </div>`)[0];
+                popup_422dda146a71f7131d4cd27a8c5372ed.setContent(html_ed55352175a70501704cc28656a6db31);
+            
+        
+
+        circle_marker_40882d2474fcce98f5b531461fce6438.bindPopup(popup_422dda146a71f7131d4cd27a8c5372ed)
+        ;
+
+        
+    
+    
+            var circle_marker_11e8be0d128571734183713e17dfa9ea = L.circleMarker(
+                [-19.7549912, -47.9231289],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_1952b82cdf0d9f91b484c3fb8ae49c32 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_aac7ef904f2946c176ed14ad998c7713 = $(`<div id="html_aac7ef904f2946c176ed14ad998c7713" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA JOAO ALFREDO<br>             <b>Data do fato:</b> 09/01/2021<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2021-001310632-001         </div>         </div>`)[0];
+                popup_1952b82cdf0d9f91b484c3fb8ae49c32.setContent(html_aac7ef904f2946c176ed14ad998c7713);
+            
+        
+
+        circle_marker_11e8be0d128571734183713e17dfa9ea.bindPopup(popup_1952b82cdf0d9f91b484c3fb8ae49c32)
+        ;
+
+        
+    
+    
+            var circle_marker_25af8087f1034dde0ccc09b9aba9813d = L.circleMarker(
+                [-19.7544726, -47.9280089],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_ce5a125919e4f3229642d2cf6aecd0b2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_384c157d5008205c079e2fb64cdeb9f9 = $(`<div id="html_384c157d5008205c079e2fb64cdeb9f9" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA CASTRO ALVES<br>             <b>Data do fato:</b> 21/01/2021<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2021-003450873-001         </div>         </div>`)[0];
+                popup_ce5a125919e4f3229642d2cf6aecd0b2.setContent(html_384c157d5008205c079e2fb64cdeb9f9);
+            
+        
+
+        circle_marker_25af8087f1034dde0ccc09b9aba9813d.bindPopup(popup_ce5a125919e4f3229642d2cf6aecd0b2)
+        ;
+
+        
+    
+    
+            var circle_marker_9b38e1ae058d0ce4d6d1e265e6856de4 = L.circleMarker(
+                [-19.7579783, -47.9085636],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_373c63a0b8fa0d589e74fa5af3e0697d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e3f12751c4670de89731b08e31a72a4a = $(`<div id="html_e3f12751c4670de89731b08e31a72a4a" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> AVENIDA LEOPOLDINO DE OLIVEIRA<br>             <b>Data do fato:</b> 04/07/2025<br>             <b>Dia:</b> SEXTA-FEIRA<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2025-030987309-001         </div>         </div>`)[0];
+                popup_373c63a0b8fa0d589e74fa5af3e0697d.setContent(html_e3f12751c4670de89731b08e31a72a4a);
+            
+        
+
+        circle_marker_9b38e1ae058d0ce4d6d1e265e6856de4.bindPopup(popup_373c63a0b8fa0d589e74fa5af3e0697d)
+        ;
+
+        
+    
+    
+            var circle_marker_daa3b635007ad70aa79af028069a3b10 = L.circleMarker(
+                [-19.7575703, -47.9282123],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_ed27ee0de8d27d99444cba179a7e4cd2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a9a29d0d258f4780b0834eb1f299c15c = $(`<div id="html_a9a29d0d258f4780b0834eb1f299c15c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA CONDE PRADOS<br>             <b>Data do fato:</b> 01/05/2021<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2021-021110820-001         </div>         </div>`)[0];
+                popup_ed27ee0de8d27d99444cba179a7e4cd2.setContent(html_a9a29d0d258f4780b0834eb1f299c15c);
+            
+        
+
+        circle_marker_daa3b635007ad70aa79af028069a3b10.bindPopup(popup_ed27ee0de8d27d99444cba179a7e4cd2)
+        ;
+
+        
+    
+    
+            var circle_marker_8de8d99fa61b06f76b1fd13249afd1e1 = L.circleMarker(
+                [-19.7521757, -47.9221717],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_cff3abe465fa63078f81f623fc722a8c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a2056d5ddc127ce802799aa5b234bd9e = $(`<div id="html_a2056d5ddc127ce802799aa5b234bd9e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA JOAO ALFREDO<br>             <b>Data do fato:</b> 27/12/2021<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> AVERIGUA PESSOA / VEICULO EM ATITUDE SUSPEITA<br>             <b>REDS:</b> 2021-061780165-001         </div>         </div>`)[0];
+                popup_cff3abe465fa63078f81f623fc722a8c.setContent(html_a2056d5ddc127ce802799aa5b234bd9e);
+            
+        
+
+        circle_marker_8de8d99fa61b06f76b1fd13249afd1e1.bindPopup(popup_cff3abe465fa63078f81f623fc722a8c)
+        ;
+
+        
+    
+    
+            var circle_marker_5c63242be560ba42313a7921c6b65126 = L.circleMarker(
+                [-19.75833333, -47.9265],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_654671c72aa623331d6413f2796bc32b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_26ba517f87442373e022a55ced9e9060 = $(`<div id="html_26ba517f87442373e022a55ced9e9060" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA CAMPOS SALES<br>             <b>Data do fato:</b> 18/04/2022<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2022-016367413-001         </div>         </div>`)[0];
+                popup_654671c72aa623331d6413f2796bc32b.setContent(html_26ba517f87442373e022a55ced9e9060);
+            
+        
+
+        circle_marker_5c63242be560ba42313a7921c6b65126.bindPopup(popup_654671c72aa623331d6413f2796bc32b)
+        ;
+
+        
+    
+    
+            var circle_marker_9b2500ea504db1c3899af7a91b6ba205 = L.circleMarker(
+                [-19.7631623, -47.9228769],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_023bd78d4680d72576f6e79084c3d358 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_86aa0bc307d017591dd359d731b5b8a3 = $(`<div id="html_86aa0bc307d017591dd359d731b5b8a3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> RUA IGUATAMA<br>             <b>Data do fato:</b> 13/02/2020<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2020-007580442-001         </div>         </div>`)[0];
+                popup_023bd78d4680d72576f6e79084c3d358.setContent(html_86aa0bc307d017591dd359d731b5b8a3);
+            
+        
+
+        circle_marker_9b2500ea504db1c3899af7a91b6ba205.bindPopup(popup_023bd78d4680d72576f6e79084c3d358)
+        ;
+
+        
+    
+    
+            var circle_marker_4c4f58f782b72a52fdd8944ca52f0402 = L.circleMarker(
+                [-19.7579783, -47.9085636],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_b28b063502d8a363b7fa1e8867401d14 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5a42535d2d5e85e788228760cb515041 = $(`<div id="html_5a42535d2d5e85e788228760cb515041" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> AVENIDA LEOPOLDINO DE OLIVEIRA<br>             <b>Data do fato:</b> 15/01/2020<br>             <b>Dia:</b> QUARTA-FEIRA<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2020-002376510-001         </div>         </div>`)[0];
+                popup_b28b063502d8a363b7fa1e8867401d14.setContent(html_5a42535d2d5e85e788228760cb515041);
+            
+        
+
+        circle_marker_4c4f58f782b72a52fdd8944ca52f0402.bindPopup(popup_b28b063502d8a363b7fa1e8867401d14)
+        ;
+
+        
+    
+    
+            var circle_marker_f47f81d9c63c09772f8fb3b519035039 = L.circleMarker(
+                [-19.7641186, -47.9247258],
+                {"bubblingMouseEvents": true, "color": "#8B1A1A", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_447f782aa525728a5c55a16266b36521);
+        
+    
+        var popup_4aabfea1241e79a2e4263145e4651c88 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ef3bf7fac942be79b55a0a173448afe3 = $(`<div id="html_ef3bf7fac942be79b55a0a173448afe3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #8B1A1A; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Abadia<br>             <b>Logradouro:</b> AVENIDA ABILIO BORGES ARAUJO<br>             <b>Data do fato:</b> 22/07/2020<br>             <b>Dia:</b> QUARTA-FEIRA<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> BAR / LANCHONETE / RESTAURANTE / SIMILAR<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2020-035115623-001         </div>         </div>`)[0];
+                popup_4aabfea1241e79a2e4263145e4651c88.setContent(html_ef3bf7fac942be79b55a0a173448afe3);
+            
+        
+
+        circle_marker_f47f81d9c63c09772f8fb3b519035039.bindPopup(popup_4aabfea1241e79a2e4263145e4651c88)
+        ;
+
+        
+    
+    
+            var feature_group_e60aa1582bceff7b5918f18dda5837dd = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_f1e41756bd5024964d09394a0576f401 = L.circleMarker(
+                [-19.7615109, -47.9051917],
+                {"bubblingMouseEvents": true, "color": "#1F4E79", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#1F4E79", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e60aa1582bceff7b5918f18dda5837dd);
+        
+    
+        var popup_462d9181bcd25590063de1229276efcc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d6bb456855c45428d6131ada98b055ec = $(`<div id="html_d6bb456855c45428d6131ada98b055ec" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #1F4E79; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles I<br>             <b>Logradouro:</b> RUA DAS MARGARIDAS<br>             <b>Data do fato:</b> 18/02/2025<br>             <b>Dia:</b> TERCA-FEIRA<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2025-007869153-001         </div>         </div>`)[0];
+                popup_462d9181bcd25590063de1229276efcc.setContent(html_d6bb456855c45428d6131ada98b055ec);
+            
+        
+
+        circle_marker_f1e41756bd5024964d09394a0576f401.bindPopup(popup_462d9181bcd25590063de1229276efcc)
+        ;
+
+        
+    
+    
+            var feature_group_e42f37994e8090e1ead2d917e9f18163 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_4d1083b6ffec813224a687a27b28d188 = L.circleMarker(
+                [-19.7695132, -47.9136439],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_cdf07e73fb7bda1a422451996793263d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c1f0a060d5c6e51690587f940b155b12 = $(`<div id="html_c1f0a060d5c6e51690587f940b155b12" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA AMINTHAS MARTINS SANTOS<br>             <b>Data do fato:</b> 28/11/2023<br>             <b>Dia:</b> TERCA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> LAVAGEM DE DINHEIRO DE ORGANIZACAO CRIMINOSA<br>             <b>REDS:</b> 2023-055452354-001         </div>         </div>`)[0];
+                popup_cdf07e73fb7bda1a422451996793263d.setContent(html_c1f0a060d5c6e51690587f940b155b12);
+            
+        
+
+        circle_marker_4d1083b6ffec813224a687a27b28d188.bindPopup(popup_cdf07e73fb7bda1a422451996793263d)
+        ;
+
+        
+    
+    
+            var circle_marker_c500c44517ce52478862e2d6dab16d89 = L.circleMarker(
+                [-19.7707777, -47.9169098],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_b5072212dbe513b31e55d29689239887 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b6d017c3a4538305cc66d313450894dc = $(`<div id="html_b6d017c3a4538305cc66d313450894dc" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA MIGUEL ARCHANJO BORGES<br>             <b>Data do fato:</b> 07/04/2026<br>             <b>Dia:</b> TERCA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2026-015917445-001         </div>         </div>`)[0];
+                popup_b5072212dbe513b31e55d29689239887.setContent(html_b6d017c3a4538305cc66d313450894dc);
+            
+        
+
+        circle_marker_c500c44517ce52478862e2d6dab16d89.bindPopup(popup_b5072212dbe513b31e55d29689239887)
+        ;
+
+        
+    
+    
+            var circle_marker_03861fa7cb0b0182679ca4a7beb46215 = L.circleMarker(
+                [-19.7625092, -47.9141388],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_97d12c48a71f963e1d26a742e20c1430 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4c7941e90a9c78f2fbdac235660b8ffa = $(`<div id="html_4c7941e90a9c78f2fbdac235660b8ffa" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA CONTORNO<br>             <b>Data do fato:</b> 08/05/2024<br>             <b>Dia:</b> QUARTA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> ABATEDOURO / FRIGORIFICO / MATADOURO<br>             <b>Natureza principal:</b> POSSE/PORTE ILEGAL ARMA FOGO/MUNIC/ACESSO USO PROIB/RESTRITO<br>             <b>REDS:</b> 2024-021029006-001         </div>         </div>`)[0];
+                popup_97d12c48a71f963e1d26a742e20c1430.setContent(html_4c7941e90a9c78f2fbdac235660b8ffa);
+            
+        
+
+        circle_marker_03861fa7cb0b0182679ca4a7beb46215.bindPopup(popup_97d12c48a71f963e1d26a742e20c1430)
+        ;
+
+        
+    
+    
+            var circle_marker_a689954a9ad3cc8634e019ab4e1af215 = L.circleMarker(
+                [-19.7697948, -47.9142932],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_dfa490816433cb3bdeb5ffe86f7112aa = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4d84651d8e4552cf92f2eb44ce293cfe = $(`<div id="html_4d84651d8e4552cf92f2eb44ce293cfe" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA AMINTHAS MARTINS SANTOS<br>             <b>Data do fato:</b> 19/12/2023<br>             <b>Dia:</b> TERCA-FEIRA<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2023-058837760-001         </div>         </div>`)[0];
+                popup_dfa490816433cb3bdeb5ffe86f7112aa.setContent(html_4d84651d8e4552cf92f2eb44ce293cfe);
+            
+        
+
+        circle_marker_a689954a9ad3cc8634e019ab4e1af215.bindPopup(popup_dfa490816433cb3bdeb5ffe86f7112aa)
+        ;
+
+        
+    
+    
+            var circle_marker_c6f3114316c3c53ab7e284b143b02929 = L.circleMarker(
+                [-19.7695132, -47.9136439],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_473a786ebf123a0615044e863f015194 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_20c809e53b125354c365d73d61a5f7e0 = $(`<div id="html_20c809e53b125354c365d73d61a5f7e0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA AMINTHAS MARTINS SANTOS<br>             <b>Data do fato:</b> 14/07/2022<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE/PORTE ILEGAL ARMA FOGO/MUNIC/ACESSO USO PROI<br>             <b>REDS:</b> 2022-030320193-001         </div>         </div>`)[0];
+                popup_473a786ebf123a0615044e863f015194.setContent(html_20c809e53b125354c365d73d61a5f7e0);
+            
+        
+
+        circle_marker_c6f3114316c3c53ab7e284b143b02929.bindPopup(popup_473a786ebf123a0615044e863f015194)
+        ;
+
+        
+    
+    
+            var circle_marker_c15d79af6b90f8a140337ef2852f7886 = L.circleMarker(
+                [-19.7703377, -47.9142083],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_f05d9bda71960dccb85cdb93ef712127 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5435df49eb938110d0f3dfb15bc762c5 = $(`<div id="html_5435df49eb938110d0f3dfb15bc762c5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA MIGUEL ARCHANJO BORGES<br>             <b>Data do fato:</b> 08/04/2022<br>             <b>Dia:</b> SEXTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2022-015017084-001         </div>         </div>`)[0];
+                popup_f05d9bda71960dccb85cdb93ef712127.setContent(html_5435df49eb938110d0f3dfb15bc762c5);
+            
+        
+
+        circle_marker_c15d79af6b90f8a140337ef2852f7886.bindPopup(popup_f05d9bda71960dccb85cdb93ef712127)
+        ;
+
+        
+    
+    
+            var circle_marker_a2459c98e521e8fa111d317f84f10a42 = L.circleMarker(
+                [-19.7686584, -47.9171993],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_297d2dbbdb47fec9dd65c3aec76d0537 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_ce9f057b6332c36adefa2be07a389384 = $(`<div id="html_ce9f057b6332c36adefa2be07a389384" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA SILVIO VIEIRA SILVA<br>             <b>Data do fato:</b> 07/12/2020<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> AMEACA<br>             <b>REDS:</b> 2020-058848799-001         </div>         </div>`)[0];
+                popup_297d2dbbdb47fec9dd65c3aec76d0537.setContent(html_ce9f057b6332c36adefa2be07a389384);
+            
+        
+
+        circle_marker_a2459c98e521e8fa111d317f84f10a42.bindPopup(popup_297d2dbbdb47fec9dd65c3aec76d0537)
+        ;
+
+        
+    
+    
+            var circle_marker_6c44d79214848a4f3f11db7a5d1c8686 = L.circleMarker(
+                [-19.7695648, -47.9159743],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_b9939c68e721e52a993ed6cb6dfda887 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d41fad0cb5f8196ac9c07c3dae8ada68 = $(`<div id="html_d41fad0cb5f8196ac9c07c3dae8ada68" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> PRACA LAGO AZUL<br>             <b>Data do fato:</b> 13/01/2020<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> QUADRILHA OU BANDO<br>             <b>REDS:</b> 2020-002144789-001         </div>         </div>`)[0];
+                popup_b9939c68e721e52a993ed6cb6dfda887.setContent(html_d41fad0cb5f8196ac9c07c3dae8ada68);
+            
+        
+
+        circle_marker_6c44d79214848a4f3f11db7a5d1c8686.bindPopup(popup_b9939c68e721e52a993ed6cb6dfda887)
+        ;
+
+        
+    
+    
+            var circle_marker_61fe671ab3d924a0410e7d56142ad280 = L.circleMarker(
+                [-19.7697948, -47.9142932],
+                {"bubblingMouseEvents": true, "color": "#7B5DAA", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_e42f37994e8090e1ead2d917e9f18163);
+        
+    
+        var popup_0c3abefb8a1f6e7884ef14e70c5e67e7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1316c7717d22a88d15748e73a16801f0 = $(`<div id="html_1316c7717d22a88d15748e73a16801f0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #7B5DAA; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Costa Teles II<br>             <b>Logradouro:</b> AVENIDA AMINTHAS MARTINS SANTOS<br>             <b>Data do fato:</b> 20/02/2021<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2021-008990087-001         </div>         </div>`)[0];
+                popup_0c3abefb8a1f6e7884ef14e70c5e67e7.setContent(html_1316c7717d22a88d15748e73a16801f0);
+            
+        
+
+        circle_marker_61fe671ab3d924a0410e7d56142ad280.bindPopup(popup_0c3abefb8a1f6e7884ef14e70c5e67e7)
+        ;
+
+        
+    
+    
+            var feature_group_9291cf17c36d0f1a23f112f30c81a174 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_91876fcf72d644aca07723b67d7a9100 = L.circleMarker(
+                [-19.7646633, -47.8911153],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_0c4f6cf9e7a4d133e9abce1c19b04342 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a15395adb52e7d5d695ddda7a9146030 = $(`<div id="html_a15395adb52e7d5d695ddda7a9146030" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS LARANJEIRAS<br>             <b>Data do fato:</b> 24/08/2020<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2020-040918372-001         </div>         </div>`)[0];
+                popup_0c4f6cf9e7a4d133e9abce1c19b04342.setContent(html_a15395adb52e7d5d695ddda7a9146030);
+            
+        
+
+        circle_marker_91876fcf72d644aca07723b67d7a9100.bindPopup(popup_0c4f6cf9e7a4d133e9abce1c19b04342)
+        ;
+
+        
+    
+    
+            var circle_marker_e872925bd5f053dc504fc3b7d7e23783 = L.circleMarker(
+                [-19.7645982, -47.891107],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_8d816528ef41432817ee0b0621cd6ecc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_eeb1a3e1ab8a85de95013b12221ce0dd = $(`<div id="html_eeb1a3e1ab8a85de95013b12221ce0dd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS LARANJEIRAS<br>             <b>Data do fato:</b> 24/11/2025<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE/PORTE ILEGAL ARMA FOGO/MUNIC/ACESSO USO PROIB/RESTRITO<br>             <b>REDS:</b> 2025-054416040-001         </div>         </div>`)[0];
+                popup_8d816528ef41432817ee0b0621cd6ecc.setContent(html_eeb1a3e1ab8a85de95013b12221ce0dd);
+            
+        
+
+        circle_marker_e872925bd5f053dc504fc3b7d7e23783.bindPopup(popup_8d816528ef41432817ee0b0621cd6ecc)
+        ;
+
+        
+    
+    
+            var circle_marker_a8582f4051c7af94fbe36d40c42d5c88 = L.circleMarker(
+                [-19.7648739, -47.9032026],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_d8d619dd2f7181fbb4bb6b6457cb6f67 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6b39be02c609104a492e0a77ce534294 = $(`<div id="html_6b39be02c609104a492e0a77ce534294" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA NABOR ABADIO OLIVEIRA<br>             <b>Data do fato:</b> 27/02/2025<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2025-009510555-001         </div>         </div>`)[0];
+                popup_d8d619dd2f7181fbb4bb6b6457cb6f67.setContent(html_6b39be02c609104a492e0a77ce534294);
+            
+        
+
+        circle_marker_a8582f4051c7af94fbe36d40c42d5c88.bindPopup(popup_d8d619dd2f7181fbb4bb6b6457cb6f67)
+        ;
+
+        
+    
+    
+            var circle_marker_9b0dedef3af430e8801d731e40493d29 = L.circleMarker(
+                [-19.7626295, -47.901044],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_5a120b70dd6b28ed00b5b79e50677ade = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8e8ce3c8a1d6ffe9874736fb8d94203e = $(`<div id="html_8e8ce3c8a1d6ffe9874736fb8d94203e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DOS LIRIOS<br>             <b>Data do fato:</b> 13/10/2022<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2022-045063322-001         </div>         </div>`)[0];
+                popup_5a120b70dd6b28ed00b5b79e50677ade.setContent(html_8e8ce3c8a1d6ffe9874736fb8d94203e);
+            
+        
+
+        circle_marker_9b0dedef3af430e8801d731e40493d29.bindPopup(popup_5a120b70dd6b28ed00b5b79e50677ade)
+        ;
+
+        
+    
+    
+            var circle_marker_bd56423239cf2bfb24a61a03c406317c = L.circleMarker(
+                [-19.7671664, -47.8988787],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_6947fcaa0e7962b051ec5700281d367a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c1ff63066263a541fad882414efd42fb = $(`<div id="html_c1ff63066263a541fad882414efd42fb" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA NABOR ABADIO OLIVEIRA<br>             <b>Data do fato:</b> 25/01/2023<br>             <b>Dia:</b> QUARTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2023-004024914-001         </div>         </div>`)[0];
+                popup_6947fcaa0e7962b051ec5700281d367a.setContent(html_c1ff63066263a541fad882414efd42fb);
+            
+        
+
+        circle_marker_bd56423239cf2bfb24a61a03c406317c.bindPopup(popup_6947fcaa0e7962b051ec5700281d367a)
+        ;
+
+        
+    
+    
+            var circle_marker_f9d413751dc6cbdf1db4d92d308eacc6 = L.circleMarker(
+                [-19.7586813, -47.8971882],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_fe8c31e47a46c2f4a9beeb57ab46ec2b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4730bc7d5f89b13050fcecdb3fd4c99e = $(`<div id="html_4730bc7d5f89b13050fcecdb3fd4c99e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS MAGNOLIAS<br>             <b>Data do fato:</b> 20/05/2022<br>             <b>Dia:</b> SEXTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2022-021563448-001         </div>         </div>`)[0];
+                popup_fe8c31e47a46c2f4a9beeb57ab46ec2b.setContent(html_4730bc7d5f89b13050fcecdb3fd4c99e);
+            
+        
+
+        circle_marker_f9d413751dc6cbdf1db4d92d308eacc6.bindPopup(popup_fe8c31e47a46c2f4a9beeb57ab46ec2b)
+        ;
+
+        
+    
+    
+            var circle_marker_755b6d76374d4fc0eccc8ffb2830d229 = L.circleMarker(
+                [-19.7634821, -47.9027116],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_f1b750abf018bacb1391a06790494bd1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_154c7277037b6583ddb75e4610fbc963 = $(`<div id="html_154c7277037b6583ddb75e4610fbc963" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS TULIPAS<br>             <b>Data do fato:</b> 07/06/2020<br>             <b>Dia:</b> DOMINGO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2020-027173090-001         </div>         </div>`)[0];
+                popup_f1b750abf018bacb1391a06790494bd1.setContent(html_154c7277037b6583ddb75e4610fbc963);
+            
+        
+
+        circle_marker_755b6d76374d4fc0eccc8ffb2830d229.bindPopup(popup_f1b750abf018bacb1391a06790494bd1)
+        ;
+
+        
+    
+    
+            var circle_marker_ef65845d1e86d75d520c2570fd8b1ced = L.circleMarker(
+                [-19.7630253, -47.9028254],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_fa7b4bcc846806c6f6faf2bcc46312cc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bdf33fa8fa5c36fd8785c8601e60b565 = $(`<div id="html_bdf33fa8fa5c36fd8785c8601e60b565" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA IDA LOUSADA<br>             <b>Data do fato:</b> 21/02/2024<br>             <b>Dia:</b> QUARTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2024-008231658-001         </div>         </div>`)[0];
+                popup_fa7b4bcc846806c6f6faf2bcc46312cc.setContent(html_bdf33fa8fa5c36fd8785c8601e60b565);
+            
+        
+
+        circle_marker_ef65845d1e86d75d520c2570fd8b1ced.bindPopup(popup_fa7b4bcc846806c6f6faf2bcc46312cc)
+        ;
+
+        
+    
+    
+            var circle_marker_06135166c01e70cbd4870a13b1797cfc = L.circleMarker(
+                [-19.7600016, -47.8992942],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_bccfa2a2d07177180c96ccc34358e15b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4806acefe00d1f498e4a70f3f3dd741e = $(`<div id="html_4806acefe00d1f498e4a70f3f3dd741e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS ACUCENAS<br>             <b>Data do fato:</b> 02/09/2021<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2021-042519179-001         </div>         </div>`)[0];
+                popup_bccfa2a2d07177180c96ccc34358e15b.setContent(html_4806acefe00d1f498e4a70f3f3dd741e);
+            
+        
+
+        circle_marker_06135166c01e70cbd4870a13b1797cfc.bindPopup(popup_bccfa2a2d07177180c96ccc34358e15b)
+        ;
+
+        
+    
+    
+            var circle_marker_4287c399bddb5c71fd248fc6234455a8 = L.circleMarker(
+                [-19.7601834, -47.9037918],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_00f540da65ef1263ca216a18e7436247 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7a627e5b0f2d307f5153523684a4a1ae = $(`<div id="html_7a627e5b0f2d307f5153523684a4a1ae" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> AVENIDA PADRE EDDIE BERNARDES SILVA<br>             <b>Data do fato:</b> 09/09/2021<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2021-043680769-001         </div>         </div>`)[0];
+                popup_00f540da65ef1263ca216a18e7436247.setContent(html_7a627e5b0f2d307f5153523684a4a1ae);
+            
+        
+
+        circle_marker_4287c399bddb5c71fd248fc6234455a8.bindPopup(popup_00f540da65ef1263ca216a18e7436247)
+        ;
+
+        
+    
+    
+            var circle_marker_8bece2c4497caefc07abcd425a3503b8 = L.circleMarker(
+                [-19.7595672, -47.8966678],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_14ead18a6cf68ef61ec0f2e64211eba3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_14af620436b201d2f869cc3196dc036d = $(`<div id="html_14af620436b201d2f869cc3196dc036d" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA TURMALINAS<br>             <b>Data do fato:</b> 18/09/2021<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2021-045153938-001         </div>         </div>`)[0];
+                popup_14ead18a6cf68ef61ec0f2e64211eba3.setContent(html_14af620436b201d2f869cc3196dc036d);
+            
+        
+
+        circle_marker_8bece2c4497caefc07abcd425a3503b8.bindPopup(popup_14ead18a6cf68ef61ec0f2e64211eba3)
+        ;
+
+        
+    
+    
+            var circle_marker_6a3ce55d73aeafc9d0a7861e5ac1a36f = L.circleMarker(
+                [-19.7648927, -47.9001064],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_a5e77b86636f34739e8368033902a169 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0cbb4eea3632b069f7ae65f85c652913 = $(`<div id="html_0cbb4eea3632b069f7ae65f85c652913" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS ACUCENAS<br>             <b>Data do fato:</b> 04/09/2022<br>             <b>Dia:</b> DOMINGO<br>             <b>Faixa horária:</b> De 12:00 as 17:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2022-038700798-001         </div>         </div>`)[0];
+                popup_a5e77b86636f34739e8368033902a169.setContent(html_0cbb4eea3632b069f7ae65f85c652913);
+            
+        
+
+        circle_marker_6a3ce55d73aeafc9d0a7861e5ac1a36f.bindPopup(popup_a5e77b86636f34739e8368033902a169)
+        ;
+
+        
+    
+    
+            var circle_marker_a823d8888787c3df3182b7e58fc45085 = L.circleMarker(
+                [-19.758228, -47.9015238],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_28ddf26013c328ad28efa3b7808e9d93 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1515012de378652769632a14e79b6524 = $(`<div id="html_1515012de378652769632a14e79b6524" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> AVENIDA NIZA MARQUES GUARITA<br>             <b>Data do fato:</b> 07/07/2022<br>             <b>Dia:</b> QUINTA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2022-029260612-001         </div>         </div>`)[0];
+                popup_28ddf26013c328ad28efa3b7808e9d93.setContent(html_1515012de378652769632a14e79b6524);
+            
+        
+
+        circle_marker_a823d8888787c3df3182b7e58fc45085.bindPopup(popup_28ddf26013c328ad28efa3b7808e9d93)
+        ;
+
+        
+    
+    
+            var circle_marker_4e2172f94809d788e258865166414534 = L.circleMarker(
+                [-19.7657122, -47.8992736],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_cb8bc7549b45af2cc22b2f37849f326c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2ce28b091dd56a3b71cef8972bee29e0 = $(`<div id="html_2ce28b091dd56a3b71cef8972bee29e0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA NABOR ABADIO OLIVEIRA<br>             <b>Data do fato:</b> 13/03/2023<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> CASA<br>             <b>Natureza principal:</b> POSSE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO<br>             <b>REDS:</b> 2023-012019144-001         </div>         </div>`)[0];
+                popup_cb8bc7549b45af2cc22b2f37849f326c.setContent(html_2ce28b091dd56a3b71cef8972bee29e0);
+            
+        
+
+        circle_marker_4e2172f94809d788e258865166414534.bindPopup(popup_cb8bc7549b45af2cc22b2f37849f326c)
+        ;
+
+        
+    
+    
+            var circle_marker_263aad2203d9fa305845a465262758fb = L.circleMarker(
+                [-19.7603549, -47.9007346],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_67985588f884a89f96eecb8b57cc9e9b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_694ea4f980620ffe407d84452a7ff6d6 = $(`<div id="html_694ea4f980620ffe407d84452a7ff6d6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> AVENIDA PADRE EDDIE BERNARDES SILVA<br>             <b>Data do fato:</b> 11/04/2022<br>             <b>Dia:</b> SEGUNDA-FEIRA<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2022-015430323-001         </div>         </div>`)[0];
+                popup_67985588f884a89f96eecb8b57cc9e9b.setContent(html_694ea4f980620ffe407d84452a7ff6d6);
+            
+        
+
+        circle_marker_263aad2203d9fa305845a465262758fb.bindPopup(popup_67985588f884a89f96eecb8b57cc9e9b)
+        ;
+
+        
+    
+    
+            var circle_marker_6bd81a851f817f78244e2aceb2a91e9c = L.circleMarker(
+                [-19.7649033, -47.8980503],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_1e0201a1ed5a9fda06f40ce5d9424a09 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_14a31e8ac3d257d459ed23ae1d3416e2 = $(`<div id="html_14a31e8ac3d257d459ed23ae1d3416e2" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA DAS MAGNOLIAS<br>             <b>Data do fato:</b> 04/06/2022<br>             <b>Dia:</b> SABADO<br>             <b>Faixa horária:</b> De 18:00 as 23:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2022-023929939-001         </div>         </div>`)[0];
+                popup_1e0201a1ed5a9fda06f40ce5d9424a09.setContent(html_14a31e8ac3d257d459ed23ae1d3416e2);
+            
+        
+
+        circle_marker_6bd81a851f817f78244e2aceb2a91e9c.bindPopup(popup_1e0201a1ed5a9fda06f40ce5d9424a09)
+        ;
+
+        
+    
+    
+            var circle_marker_688e35de1bfc73c6c4c8ecc344df84bc = L.circleMarker(
+                [-19.7658621, -47.8980567],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_ddde9768f9b4ed47a25c8709d45f5da5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_111a51e171623ddb5be51cf1607a1cad = $(`<div id="html_111a51e171623ddb5be51cf1607a1cad" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> RUA NABOR ABADIO OLIVEIRA<br>             <b>Data do fato:</b> 27/11/2022<br>             <b>Dia:</b> DOMINGO<br>             <b>Faixa horária:</b> De 00:00 as 05:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> TRAFICO ILICITO DE DROGAS<br>             <b>REDS:</b> 2022-051851369-001         </div>         </div>`)[0];
+                popup_ddde9768f9b4ed47a25c8709d45f5da5.setContent(html_111a51e171623ddb5be51cf1607a1cad);
+            
+        
+
+        circle_marker_688e35de1bfc73c6c4c8ecc344df84bc.bindPopup(popup_ddde9768f9b4ed47a25c8709d45f5da5)
+        ;
+
+        
+    
+    
+            var circle_marker_01223b19c7a9877725ca468183a5b2fe = L.circleMarker(
+                [-19.7613229, -47.8927424],
+                {"bubblingMouseEvents": true, "color": "#2E6F47", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.75, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5, "stroke": true, "weight": 1.2}
+            ).addTo(feature_group_9291cf17c36d0f1a23f112f30c81a174);
+        
+    
+        var popup_bed441f750bac181e7c75ffdd1c2068a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_154c4a23d292bd3cb7b13a4d0d48ccd5 = $(`<div id="html_154c4a23d292bd3cb7b13a4d0d48ccd5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 12px; min-width: 220px;'>             <div style='background: #2E6F47; color: white; padding: 4px 8px;                  font-weight: bold; margin: -10px -10px 8px -10px;                  border-radius: 3px 3px 0 0;'>                 Apreensão de armas             </div>             <b>Bairro:</b> Lourdes<br>             <b>Logradouro:</b> AVENIDA PADRE EDDIE BERNARDES SILVA<br>             <b>Data do fato:</b> 14/02/2020<br>             <b>Dia:</b> SEXTA-FEIRA<br>             <b>Faixa horária:</b> De 06:00 as 11:59<br>             <b>Local imediato:</b> VIA DE ACESSO PUBLICA<br>             <b>Natureza principal:</b> PORTE ILEGAL ARMA DE FOGO/ACESSÓRIO/MUNIÇÃO DE USO PERMITIDO<br>             <b>REDS:</b> 2020-007811372-001         </div>         </div>`)[0];
+                popup_bed441f750bac181e7c75ffdd1c2068a.setContent(html_154c4a23d292bd3cb7b13a4d0d48ccd5);
+            
+        
+
+        circle_marker_01223b19c7a9877725ca468183a5b2fe.bindPopup(popup_bed441f750bac181e7c75ffdd1c2068a)
+        ;
+
+        
+    
+    
+            var feature_group_eb229f94d37dc42464a7e6d0acf7b808 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_390371f43edc59bcd3d997e3396c3f86 = L.circleMarker(
+                [-19.769654, -47.91396855],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_5d26e9845c0b49d898545cefca07a7c8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8992c183684da9ba8d6f7cf37d0cb909 = $(`<div id="html_8992c183684da9ba8d6f7cf37d0cb909" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>AVENIDA AMINTHAS MARTINS SANTOS</b><br>             <span style='color: #7B5DAA;'>Costa Teles II</span><br>             <b>4 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_5d26e9845c0b49d898545cefca07a7c8.setContent(html_8992c183684da9ba8d6f7cf37d0cb909);
+            
+        
+
+        circle_marker_390371f43edc59bcd3d997e3396c3f86.bindPopup(popup_5d26e9845c0b49d898545cefca07a7c8)
+        ;
+
+        
+    
+    
+            var circle_marker_c64800fcfe3812e0e543f464c82cdcd6 = L.circleMarker(
+                [-19.76590365, -47.8998529],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11.6, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_263092391de8615a147450736ab11e16 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5e8d0665096bbf46add199ac22516ac1 = $(`<div id="html_5e8d0665096bbf46add199ac22516ac1" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA NABOR ABADIO OLIVEIRA</b><br>             <span style='color: #2E6F47;'>Lourdes</span><br>             <b>4 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_263092391de8615a147450736ab11e16.setContent(html_5e8d0665096bbf46add199ac22516ac1);
+            
+        
+
+        circle_marker_c64800fcfe3812e0e543f464c82cdcd6.bindPopup(popup_263092391de8615a147450736ab11e16)
+        ;
+
+        
+    
+    
+            var circle_marker_b7b8ee2fc408ffe8b7fb4ae064db0bee = L.circleMarker(
+                [-19.760620399999997, -47.8990896],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10.2, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_34888f968a18587ee0ed217118df100c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e2856234fce4317f376591534f610c1f = $(`<div id="html_e2856234fce4317f376591534f610c1f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>AVENIDA PADRE EDDIE BERNARDES SILVA</b><br>             <span style='color: #2E6F47;'>Lourdes</span><br>             <b>3 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_34888f968a18587ee0ed217118df100c.setContent(html_e2856234fce4317f376591534f610c1f);
+            
+        
+
+        circle_marker_b7b8ee2fc408ffe8b7fb4ae064db0bee.bindPopup(popup_34888f968a18587ee0ed217118df100c)
+        ;
+
+        
+    
+    
+            var circle_marker_8a900babde1a23ca86d1c67b4e8a7c0a = L.circleMarker(
+                [-19.7579783, -47.9085636],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_d0f1c0095881c2c2772a9b8c32ad6844 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c7f2be75be01f4dc1d0a00add0b0591b = $(`<div id="html_c7f2be75be01f4dc1d0a00add0b0591b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>AVENIDA LEOPOLDINO DE OLIVEIRA</b><br>             <span style='color: #8B1A1A;'>Abadia</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_d0f1c0095881c2c2772a9b8c32ad6844.setContent(html_c7f2be75be01f4dc1d0a00add0b0591b);
+            
+        
+
+        circle_marker_8a900babde1a23ca86d1c67b4e8a7c0a.bindPopup(popup_d0f1c0095881c2c2772a9b8c32ad6844)
+        ;
+
+        
+    
+    
+            var circle_marker_0164c505c79bd574d1c62919c0629d99 = L.circleMarker(
+                [-19.770557699999998, -47.91555905],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#7B5DAA", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_467bcbf73f7d8d77d96ed0f625ab1dac = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b18e64e3b25b365779b69d981eb522ee = $(`<div id="html_b18e64e3b25b365779b69d981eb522ee" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>AVENIDA MIGUEL ARCHANJO BORGES</b><br>             <span style='color: #7B5DAA;'>Costa Teles II</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_467bcbf73f7d8d77d96ed0f625ab1dac.setContent(html_b18e64e3b25b365779b69d981eb522ee);
+            
+        
+
+        circle_marker_0164c505c79bd574d1c62919c0629d99.bindPopup(popup_467bcbf73f7d8d77d96ed0f625ab1dac)
+        ;
+
+        
+    
+    
+            var circle_marker_a546cba60dbc3679627e16145593f8c3 = L.circleMarker(
+                [-19.754469450000002, -47.92791545],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_00dfb414ded56c3734480f0420df6a4a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6b23aa038fbb02b1f9d4c3bc5fe2c92b = $(`<div id="html_6b23aa038fbb02b1f9d4c3bc5fe2c92b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA CASTRO ALVES</b><br>             <span style='color: #8B1A1A;'>Abadia</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_00dfb414ded56c3734480f0420df6a4a.setContent(html_6b23aa038fbb02b1f9d4c3bc5fe2c92b);
+            
+        
+
+        circle_marker_a546cba60dbc3679627e16145593f8c3.bindPopup(popup_00dfb414ded56c3734480f0420df6a4a)
+        ;
+
+        
+    
+    
+            var circle_marker_57b7606524f5fdaad729fa150dd43665 = L.circleMarker(
+                [-19.76244715, -47.8997003],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_bb96aedd52c53ffe922533fc3f1cafed = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0e8dc4a3c68947b393066489e240c20f = $(`<div id="html_0e8dc4a3c68947b393066489e240c20f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA DAS ACUCENAS</b><br>             <span style='color: #2E6F47;'>Lourdes</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_bb96aedd52c53ffe922533fc3f1cafed.setContent(html_0e8dc4a3c68947b393066489e240c20f);
+            
+        
+
+        circle_marker_57b7606524f5fdaad729fa150dd43665.bindPopup(popup_bb96aedd52c53ffe922533fc3f1cafed)
+        ;
+
+        
+    
+    
+            var circle_marker_2a5683c267fd8f7e3a24b3726b23736d = L.circleMarker(
+                [-19.75719675, -47.9281747],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_f3dec9f62f7f8ead16d349ad780a218e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8b5dc10f2d9820a202662c0878db9b29 = $(`<div id="html_8b5dc10f2d9820a202662c0878db9b29" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA CONDE PRADOS</b><br>             <span style='color: #8B1A1A;'>Abadia</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_f3dec9f62f7f8ead16d349ad780a218e.setContent(html_8b5dc10f2d9820a202662c0878db9b29);
+            
+        
+
+        circle_marker_2a5683c267fd8f7e3a24b3726b23736d.bindPopup(popup_f3dec9f62f7f8ead16d349ad780a218e)
+        ;
+
+        
+    
+    
+            var circle_marker_b47ca9f39cec4d02ed36a531910c0638 = L.circleMarker(
+                [-19.76463075, -47.89111115],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_117493d588898f812ce16db1a286e486 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9a67d75d2647b7240f632375cc74ef91 = $(`<div id="html_9a67d75d2647b7240f632375cc74ef91" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA DAS LARANJEIRAS</b><br>             <span style='color: #2E6F47;'>Lourdes</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_117493d588898f812ce16db1a286e486.setContent(html_9a67d75d2647b7240f632375cc74ef91);
+            
+        
+
+        circle_marker_b47ca9f39cec4d02ed36a531910c0638.bindPopup(popup_117493d588898f812ce16db1a286e486)
+        ;
+
+        
+    
+    
+            var circle_marker_1be8653daee9e8eabfd16fa23962782e = L.circleMarker(
+                [-19.7617923, -47.897619250000005],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#2E6F47", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_f32c9568bd81af557dbd951c68cc4af0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a381ef76edf116deddaf821372f91779 = $(`<div id="html_a381ef76edf116deddaf821372f91779" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA DAS MAGNOLIAS</b><br>             <span style='color: #2E6F47;'>Lourdes</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_f32c9568bd81af557dbd951c68cc4af0.setContent(html_a381ef76edf116deddaf821372f91779);
+            
+        
+
+        circle_marker_1be8653daee9e8eabfd16fa23962782e.bindPopup(popup_f32c9568bd81af557dbd951c68cc4af0)
+        ;
+
+        
+    
+    
+            var circle_marker_ca29cd272b94df3b1174a835b8db26dc = L.circleMarker(
+                [-19.7631623, -47.9228769],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_f7474b71c1d0088c6178d40ff9376c5a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5a1b3f12fbcad1fb01ff771a8a32e409 = $(`<div id="html_5a1b3f12fbcad1fb01ff771a8a32e409" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA IGUATAMA</b><br>             <span style='color: #8B1A1A;'>Abadia</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_f7474b71c1d0088c6178d40ff9376c5a.setContent(html_5a1b3f12fbcad1fb01ff771a8a32e409);
+            
+        
+
+        circle_marker_ca29cd272b94df3b1174a835b8db26dc.bindPopup(popup_f7474b71c1d0088c6178d40ff9376c5a)
+        ;
+
+        
+    
+    
+            var circle_marker_d1e1def44dfdccc16c1f142f85b8e211 = L.circleMarker(
+                [-19.75358345, -47.9226503],
+                {"bubblingMouseEvents": true, "color": "#000", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#8B1A1A", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8.8, "stroke": true, "weight": 1.5}
+            ).addTo(feature_group_eb229f94d37dc42464a7e6d0acf7b808);
+        
+    
+        var popup_7d65e7d390ec21ccdb18662e32df444a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_68e000012ecda159bdad501d1667da84 = $(`<div id="html_68e000012ecda159bdad501d1667da84" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial; font-size: 13px;'>             <b>RUA JOAO ALFREDO</b><br>             <span style='color: #8B1A1A;'>Abadia</span><br>             <b>2 ocorrências</b> (apreensão de armas)         </div>         </div>`)[0];
+                popup_7d65e7d390ec21ccdb18662e32df444a.setContent(html_68e000012ecda159bdad501d1667da84);
+            
+        
+
+        circle_marker_d1e1def44dfdccc16c1f142f85b8e211.bindPopup(popup_7d65e7d390ec21ccdb18662e32df444a)
+        ;
+
+        
+    
+    
+            feature_group_eb229f94d37dc42464a7e6d0acf7b808.addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+        
+    
+            var tile_layer_702d0184cb2056a4091a512b78546398 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_702d0184cb2056a4091a512b78546398.addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+        
+    
+            var tile_layer_6cc13ce8c925325e3ac7bb805972e53c = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "\u00a9 OpenStreetMap, \u00a9 CARTO",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_6cc13ce8c925325e3ac7bb805972e53c.addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+        
+    
+            var tile_layer_9cc76fd1f94decdccf537a00d811f5d1 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_411398e4eb795f595a006bf37d99e123 = new L.Control.MiniMap(
+                tile_layer_9cc76fd1f94decdccf537a00d811f5d1,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_c704ea9664ddd80c70f6fed6931d5957.addControl(mini_map_411398e4eb795f595a006bf37d99e123);
+        
+    
+            var measure_control_bc2b474aa3182ac97018c413efabf2fc = new L.Control.Measure(
+                {
+  "position": "topleft",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "miles",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_c704ea9664ddd80c70f6fed6931d5957.addControl(measure_control_bc2b474aa3182ac97018c413efabf2fc);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var layer_control_0c40a088a14d4d9f4ed68685bb3af4c8_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_1ccb920ef1ca2efc6692dc4c6b067c2d,
+                    "Sat\u00e9lite (Esri)" : tile_layer_702d0184cb2056a4091a512b78546398,
+                    "Mapa claro (CartoDB)" : tile_layer_6cc13ce8c925325e3ac7bb805972e53c,
+                },
+                overlays :  {
+                    "Concentra\u00e7\u00e3o (mapa de calor)" : heat_map_cba562be153923ef18d6d7feeec6f4fc,
+                    "Ocorr\u00eancias \u2014 Abadia" : feature_group_447f782aa525728a5c55a16266b36521,
+                    "Ocorr\u00eancias \u2014 Costa Teles I" : feature_group_e60aa1582bceff7b5918f18dda5837dd,
+                    "Ocorr\u00eancias \u2014 Costa Teles II" : feature_group_e42f37994e8090e1ead2d917e9f18163,
+                    "Ocorr\u00eancias \u2014 Lourdes" : feature_group_9291cf17c36d0f1a23f112f30c81a174,
+                    "Top logradouros (concentra\u00e7\u00e3o)" : feature_group_eb229f94d37dc42464a7e6d0acf7b808,
+                },
+            };
+            let layer_control_0c40a088a14d4d9f4ed68685bb3af4c8 = L.control.layers(
+                layer_control_0c40a088a14d4d9f4ed68685bb3af4c8_layers.base_layers,
+                layer_control_0c40a088a14d4d9f4ed68685bb3af4c8_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_c704ea9664ddd80c70f6fed6931d5957);
+
+        
+</script>
+</html>
