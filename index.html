@@ -99,16 +99,22 @@
         <h1>Operação Cerco Fechado - Painel de Análise Criminal</h1>
     </header>
 
+    <!-- Menu Superior em Abas -->
     <div class="tabs-container">
-        <button class="tab-btn active" onclick="switchTab(event, 'mapa1')">Armas</button>
-        <button class="tab-btn" onclick="switchTab(event, 'mapa2')">Homicídios</button>
-        <button class="tab-btn" onclick="switchTab(event, 'mapa3')">Tráfico</button>
-        <button class="tab-btn" onclick="switchTab(event, 'mapa4')">Relação Naturezas</button>
-        <button class="tab-btn" onclick="switchTab(event, 'mapa5')">PCC</button>
+        <button class="tab-btn active" onclick="switchTab(event, 'mapa_integrado')">Mapa Integrado</button>
+        <button class="tab-btn" onclick="switchTab(event, 'mapa1')">Armas (Pontos)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'mapa2')">Homicídios (Pontos)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'mapa3')">Tráfico (Hexagonal)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'mapa4')">3 Naturezas (Hexagonal)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'mapa5')">3 Naturezas PCC (Hexagonal)</button>
     </div>
 
+    <!-- Janelas de Exibição dos Mapas -->
     <div class="map-content">
-        <iframe id="mapa1" class="active" src="armas-mapa-pontos.html"></iframe>
+        <!-- O Mapa Integrado agora inicia como ativo ao carregar a página -->
+        <!-- O termo "%20" no link representa o espaço que está no nome do seu arquivo -->
+        <iframe id="mapa_integrado" class="active" src="MAPA%20INTEGRADO.html"></iframe>
+        <iframe id="mapa1" src="armas-mapa-pontos.html"></iframe>
         <iframe id="mapa2" src="homicidios_mapa_pontos.html"></iframe>
         <iframe id="mapa3" src="trafico-drogas-mapa-hexagonal.html"></iframe>
         <iframe id="mapa4" src="tres_naturezas_mapa_hexagonal.html"></iframe>
